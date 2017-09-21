@@ -1,5 +1,5 @@
-#ifndef EOPERANDTYPE
-# define EOPERANDTYPE
+#ifndef EOPERANDTYPE_HPP
+# define EOPERANDTYPE_HPP
 
 namespace NOperandType {
 	typedef enum  {
