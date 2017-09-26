@@ -1,4 +1,6 @@
-SRC_NAME =	main.cpp
+SRC_NAME =	main.cpp \
+							lexer.cpp \
+							Token.cpp
 
 
 INC_PATH = ./includes/
@@ -8,7 +10,7 @@ NAME = ./avm
 
 CC = clang++
 
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -g
 
 SRC_PATH = ./src/
 

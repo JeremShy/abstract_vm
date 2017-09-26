@@ -6,6 +6,6 @@
 # include <vector>
 #include <Token.hpp>
 
-std::vector<Token> lexer(std::string str);
+std::vector<Token> lexer(char *arg);
 
 #endif

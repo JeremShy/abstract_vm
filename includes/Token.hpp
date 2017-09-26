@@ -6,14 +6,16 @@
 
 typedef enum {
 	TOK_STRING,
-	TOK_INTGER,
+	TOK_INTEGER,
 	TOK_REAL,
-	TOK_OPERATOR
+	TOK_OPERATOR,
+	TOK_SEP
 } tokentype_t;
 
 class Token {
 public:
 	Token(tokentype_t _type);
+	Token(tokentype_t type, std::string content);
 	Token(Token const & src);
 	~Token(void);
 
@@ -21,7 +23,8 @@ public:
 
 private:
 	Token(void);
-	std::string _content;
+
 	tokentype_t _type;
+	std::string _content;
 };
 #endif
