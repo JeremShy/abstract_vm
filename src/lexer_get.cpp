@@ -11,13 +11,28 @@ Token getString(std::string str, size_t &i)
 	content = str.substr(start, i - start);
 	Token ret(TOK_STRING, content);
 	i--;
-	return (ret);
+	return ret;
 }
 
 Token getOperator(std::string str, size_t &i)
 {
 	Token ret(TOK_OPERATOR, std::string(1, str[i]));
-	return (ret);
+	return ret;
+}
+
+Token getSeparator(std::string str, size_t &i)
+{
+	size_t	start;
+	std::string	content;
+
+	start = i;
+	while (i < str.length() && isseparator(str[i]))
+	{
+		i++;
+	}
+	content = str.substr(start, i - start);
+	i--;
+	return Token(TOK_SEP, content);
 }
 
 Token getDigit(std::string str, size_t &i)
@@ -42,14 +57,20 @@ Token getDigit(std::string str, size_t &i)
 		if (str[i] == '-')
 		{
 			if (minusOk == false)
+			{
+				std::cout << "Error ! Will soon throw an exception." << std::endl;
 				break; // Throw Exception
+			}
 			else
 				minusOk = false;
 		}
 		else if (str[i] == '.')
 		{
 			if (dotOk == 0 || dotOk == 2)
+			{
+				std::cout << "Error ! Will soon throw an exception." << std::endl;
 				break; // Throw Exception
+			}
 			else
 				dotOk = 2;
 			dotSeen = true;
@@ -68,6 +89,7 @@ Token getDigit(std::string str, size_t &i)
 	}
 	if (dotOk == 0 || (dotSeen && dotOk == 1))
 	{
+		std::cout << "Error ! Will soon throw an exception." << std::endl;
 		// Throw exception.
 	}
 	content = str.substr(start, i - start);
@@ -76,5 +98,5 @@ Token getDigit(std::string str, size_t &i)
 	else
 		ret = Token(TOK_REAL, content);
 	i--;
-	return (ret);
+	return ret;
 }

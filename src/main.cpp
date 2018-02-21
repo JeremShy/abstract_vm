@@ -9,6 +9,7 @@
 std::string	get_instructions_from_stdin()
 {
 	std::string ret("");
+	bool first = true;
 
 	std::cin.exceptions(std::ifstream::failbit | std::ifstream::badbit | std::ifstream::eofbit);
 	while (1)
@@ -30,7 +31,13 @@ std::string	get_instructions_from_stdin()
 			//TODO : remove the exception flags on std::cin ?
 			return (ret);
 		}
-		ret += '\n' + line;
+		if (!first)
+			ret += '\n' + line;
+		else
+		{
+			ret = line;
+			first = false;
+		}
 	}
 }
 
