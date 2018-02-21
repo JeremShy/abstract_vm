@@ -61,7 +61,9 @@ Token getDigit(std::string str, size_t &i)
 			minusOk = false;
 		}
 		else
+		{
 			break;
+		}
 		i++;
 	}
 	if (dotOk == 0 || (dotSeen && dotOk == 1))

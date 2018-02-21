@@ -39,10 +39,6 @@ std::vector<Token> lexer(std::string arg)
 		}
 		else if (str[i] == ';')
 		{
-			else //Commentary
-			{
-
-			}
 		}
 		else if (isspace(str[i])) //space
 		{
