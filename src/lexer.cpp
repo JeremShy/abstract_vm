@@ -16,44 +16,29 @@ static bool isspace(char c)
 		return (false);
 }
 
-Token getString(std::string str, size_t &i)
-{
-	size_t		start;
-	std::string content("");
-
-	start = i;
-	while (i < str.length() && (isdigit(str[i]) || isalpha(str[i])))
-		i++;
-	content = str.substr(start, i - start);
-	Token ret(TOK_STRING, content);
-	return (ret);
-}
-
-std::vector<Token> lexer(char *arg)
+std::vector<Token> lexer(std::string arg)
 {
 	std::string str(arg);
 	std::vector<Token> ret;
+
+	std::cout << "Analyzing string : " << str << std::endl;
 	for (size_t i = 0; i < str.length(); i++)
 	{
 		std::cout << "	Debut de la boucle for, on en est au caractere numero " << i << " qui est : " << str[i] << std::endl;
 		if (isalpha(str[i])) //String
 		{
-			getString(str, i);
+			ret.push_back(getString(str, i));
 		}
 		else if (isdigit(str[i]) || (str[i] == '-')) //Real or integer
 		{
-
+			ret.push_back(getDigit(str, i));
 		}
 		else if (isoperator(str[i])) //operator
 		{
-
+			ret.push_back(getOperator(str, i));
 		}
 		else if (str[i] == ';')
 		{
-			if (i + 1 < str.length() && str[i + 1] == ';') // ;;
-			{
-
-			}
 			else //Commentary
 			{
 
@@ -63,7 +48,7 @@ std::vector<Token> lexer(char *arg)
 		{
 
 		}
-		else //unknown (ERROR)
+		else // Throw exception unknown character
 		{
 
 		}
