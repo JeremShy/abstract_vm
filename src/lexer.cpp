@@ -59,6 +59,10 @@ std::vector<Token> lexer(std::string arg)
 		{
 			ret.push_back(getOperator(str, i));
 		}
+		else if (isseparator(str[i]))
+		{
+			ret.push_back(getSeparator(str, i));
+		}
 		else if (str[i] == ';')
 		{
 			passCommentary(str, i);
@@ -66,10 +70,6 @@ std::vector<Token> lexer(std::string arg)
 		else if (isspace(str[i])) //space
 		{
 			passSpaces(str, i);
-		}
-		else if (isseparator(str[i]))
-		{
-			getSeparator(str, i);
 		}
 		else // Throw exception unknown character
 		{
