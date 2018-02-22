@@ -1,4 +1,5 @@
 #include <lexer.hpp>
+#include <LexicalException.hpp>
 
 static bool isoperator(char c)
 {
@@ -46,7 +47,6 @@ std::vector<Token> lexer(std::string arg)
 	std::cout << "Analyzing string : " << str << std::endl;
 	for (size_t i = 0; i < str.length(); i++)
 	{
-		// std::cout << "	Debut de la boucle for, on en est au caractere numero " << i << " qui est : " << str[i] << std::endl;
 		if (isalpha(str[i])) //String
 		{
 			ret.push_back(getString(str, i));
@@ -71,9 +71,9 @@ std::vector<Token> lexer(std::string arg)
 		{
 			passSpaces(str, i);
 		}
-		else // Throw exception unknown character
+		else
 		{
-			std::cout << "Error ! unknown character." << std::endl;
+			throw LexicalException(std::string("Unknow symbol [" + std::string(1, str[i]) + "]").c_str());
 		}
 	}
 	return ret;

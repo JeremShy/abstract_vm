@@ -1,4 +1,5 @@
 #include <lexer.hpp>
+#include <LexicalException.hpp>
 
 Token getString(std::string str, size_t &i)
 {
@@ -27,9 +28,7 @@ Token getSeparator(std::string str, size_t &i)
 
 	start = i;
 	while (i < str.length() && isseparator(str[i]))
-	{
 		i++;
-	}
 	content = str.substr(start, i - start);
 	i--;
 	return Token(TOK_SEP, content);
@@ -57,20 +56,14 @@ Token getDigit(std::string str, size_t &i)
 		if (str[i] == '-')
 		{
 			if (minusOk == false)
-			{
-				std::cout << "Error ! Will soon throw an exception." << std::endl;
-				break; // Throw Exception
-			}
+				throw LexicalException(std::string("Malformed number around char [" + std::string(1, str[i]) + "]").c_str());
 			else
 				minusOk = false;
 		}
 		else if (str[i] == '.')
 		{
 			if (dotOk == 0 || dotOk == 2)
-			{
-				std::cout << "Error ! Will soon throw an exception." << std::endl;
-				break; // Throw Exception
-			}
+				throw LexicalException(std::string("Malformed number around char [" + std::string(1, str[i]) + "]").c_str());
 			else
 				dotOk = 2;
 			dotSeen = true;
@@ -82,16 +75,11 @@ Token getDigit(std::string str, size_t &i)
 			minusOk = false;
 		}
 		else
-		{
 			break;
-		}
 		i++;
 	}
 	if (dotOk == 0 || (dotSeen && dotOk == 1))
-	{
-		std::cout << "Error ! Will soon throw an exception." << std::endl;
-		// Throw exception.
-	}
+		throw LexicalException(std::string("Malformed number around char [" + std::string(1, str[i]) + "]").c_str());
 	content = str.substr(start, i - start);
 	if (dotOk == 1)
 		ret = Token(TOK_INTEGER, content);

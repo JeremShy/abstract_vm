@@ -1,7 +1,8 @@
 SRC_NAME =	main.cpp \
-				lexer.cpp \
-				lexer_get.cpp \
-				Token.cpp
+			lexer.cpp \
+			lexer_get.cpp \
+			Token.cpp \
+			LexicalException.cpp
 
 
 INC_PATH = ./includes/
@@ -9,7 +10,7 @@ OBJ_PATH = ./obj/
 
 NAME = ./avm
 
-CC = clang++
+CC = /usr/bin/clang++
 
 #CFLAGS = -Wall -Werror -Wextra -g
 CFLAGS = -Wall -Wextra -g

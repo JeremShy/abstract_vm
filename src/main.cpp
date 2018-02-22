@@ -5,6 +5,7 @@
 #include <lexer.hpp>
 #include <Token.hpp>
 #include <fstream>
+#include <LexicalException.hpp>
 
 std::string	get_instructions_from_stdin()
 {
@@ -64,5 +65,10 @@ int main(int ac, char **av)
 	else
 		instructions = get_instructions_from_file(av[1]);
 
-	std::vector<Token> tokens = lexer(instructions);
+	try {
+		std::vector<Token> tokens = lexer(instructions);
+	} catch (const LexicalException & e) {
+		std::cout << "An error occured during lexical analysis:" << std::endl;
+		std::cout << '\t' << e.what() << std::endl;
+	}
 }
