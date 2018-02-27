@@ -6,10 +6,10 @@
 # include <vector>
 # include <Token.hpp>
 
-Token getString(std::string str, size_t &i);
-Token getDigit(std::string str, size_t &i);
-Token getOperator(std::string str, size_t &i);
-Token getSeparator(std::string str, size_t &i);
+Token getString(std::string str, size_t &i, size_t &lineNumber);
+Token getDigit(std::string str, size_t &i, size_t &lineNumber);
+Token getOperator(std::string str, size_t &i, size_t &lineNumber);
+Token getSeparator(std::string str, size_t &i, size_t &lineNumber);
 
 bool isseparator(char c);
 

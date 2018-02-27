@@ -14,8 +14,8 @@ typedef enum {
 
 class Token {
 public:
-	Token(tokentype_t _type);
-	Token(tokentype_t type, std::string content);
+	Token(tokentype_t _type, size_t lineNumber);
+	Token(tokentype_t type, std::string content, size_t lineNumber);
 	Token(void);
 	Token(Token const & src);
 	~Token(void);
@@ -29,5 +29,6 @@ public:
 private:
 	tokentype_t _type;
 	std::string _content;
+	size_t	_lineNumber;
 };
 #endif
