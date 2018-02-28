@@ -2,7 +2,9 @@ SRC_NAME =	main.cpp \
 			lexer.cpp \
 			lexer_get.cpp \
 			Token.cpp \
-			LexicalException.cpp
+			LexicalException.cpp \
+			Parser.cpp \
+			Instruction.cpp
 
 
 INC_PATH = ./includes/

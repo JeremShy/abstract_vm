@@ -6,6 +6,7 @@
 #include <Token.hpp>
 #include <fstream>
 #include <LexicalException.hpp>
+#include <Parser.hpp>
 
 std::string	get_instructions_from_stdin()
 {
@@ -20,7 +21,6 @@ std::string	get_instructions_from_stdin()
 			std::getline(std::cin, line);
 		}
 		catch (std::ios_base::failure const e) {
-			// std::cout << " " << e.what() << std::endl;
 			if (std::cin.eof())
 				std::cout << "Error : Please terminate your program with the `;;' instruction."	<< std::endl;
 			else
@@ -44,11 +44,9 @@ std::string	get_instructions_from_stdin()
 
 std::string	get_instructions_from_file(char *filename)
 {
-
 	std::cout << "Reading from a file isn't yet supported. (file = " << filename << ")." << std::endl;
 	exit(2);
-	// return std::string(std::string("Not yet supported") + filename + "\n");
-
+	return std::string(std::string("Not yet supported") + filename + "\n");
 }
 
 int main(int ac, char **av)
@@ -64,7 +62,6 @@ int main(int ac, char **av)
 		instructions = get_instructions_from_stdin();
 	else
 		instructions = get_instructions_from_file(av[1]);
-
 	try {
 		std::vector<Token> tokens = lexer(instructions);
 	} catch (const LexicalException & e) {
