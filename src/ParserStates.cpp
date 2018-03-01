@@ -18,7 +18,10 @@ void Parser::stateStart(void)
 		else if (type == TypeInt8 || type == TypeInt16 || type == TypeInt32 || type == TypeFloat || type == TypeDouble)
 			throw LexicalException("Unexpected value specifier : [" + _iterator->getContent() + "] on line " + std::to_string(_iterator->getLine()));
 		else
+		{
 			_instructions.push_back(Instruction(type));
+			_state = ExpectingSeparator;
+		}
 	}
 	else if (_iterator->getType() == TOK_SEP)
 	{
