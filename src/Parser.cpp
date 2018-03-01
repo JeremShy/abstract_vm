@@ -24,10 +24,10 @@ std::vector<Instruction>	Parser::getInstructions()
 		std::map<eParserState, void (Parser::*)(void)>::iterator it;
 
 		it = _stateMap.find(_state);
-		if (it != _stateMap.end())
-		{
+		if (it == _stateMap.end())
 			throw LexicalException("Didn't expect this state !");
-		}
+		else
+			(this->*(it->second))();
 		_iterator++;
 	}
 
