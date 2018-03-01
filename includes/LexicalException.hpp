@@ -8,9 +8,14 @@ class LexicalException : public std::exception
 {
 private:
 	char _what[64];
-	LexicalException();
+	LexicalException(void);
+	LexicalException & operator=(LexicalException const & rhs);
+
 public:
+	~LexicalException(void) throw();
 	LexicalException(const char *what);
+	LexicalException(std::string const & what);
+	LexicalException(LexicalException const & src);
 	const char * what() const throw();
 };
 

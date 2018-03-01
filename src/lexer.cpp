@@ -76,7 +76,7 @@ std::vector<Token> lexer(std::string arg)
 		}
 		else
 		{
-			throw LexicalException(std::string("Unknow symbol [" + std::string(1, str[i]) + "] on line " + std::to_string(lineNumber)).c_str());
+			throw LexicalException("Unknow symbol [" + std::string(1, str[i]) + "] on line " + std::to_string(lineNumber));
 		}
 	}
 	return ret;

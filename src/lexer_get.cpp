@@ -60,14 +60,14 @@ Token getDigit(std::string str, size_t &i, size_t &lineNumber)
 		if (str[i] == '-')
 		{
 			if (minusOk == false)
-				throw LexicalException(std::string("Malformed number around char [" + std::string(1, str[i]) + "] on line " + std::to_string(lineNumber)).c_str());
+				throw LexicalException("Malformed number around char [" + std::string(1, str[i]) + "] on line " + std::to_string(lineNumber));
 			else
 				minusOk = false;
 		}
 		else if (str[i] == '.')
 		{
 			if (dotOk == 0 || dotOk == 2)
-				throw LexicalException(std::string("Malformed number around char [" + std::string(1, str[i]) + "] on line " + std::to_string(lineNumber)).c_str());
+				throw LexicalException("Malformed number around char [" + std::string(1, str[i]) + "] on line " + std::to_string(lineNumber));
 			else
 				dotOk = 2;
 			dotSeen = true;
@@ -83,7 +83,7 @@ Token getDigit(std::string str, size_t &i, size_t &lineNumber)
 		i++;
 	}
 	if (dotOk == 0 || (dotSeen && dotOk == 1))
-		throw LexicalException(std::string("Malformed number around char [" + std::string(1, str[i]) + "] on line " + std::to_string(lineNumber)).c_str());
+		throw LexicalException("Malformed number around char [" + std::string(1, str[i]) + "] on line " + std::to_string(lineNumber));
 	content = str.substr(start, i - start);
 	if (dotOk == 1)
 		ret = Token(TOK_INTEGER, content, lineNumber);

@@ -12,7 +12,8 @@ enum eInstructionType {
 	Div,
 	Mod,
 	Print,
-	Exit
+	Exit,
+	Undefined
 };
 
 #endif

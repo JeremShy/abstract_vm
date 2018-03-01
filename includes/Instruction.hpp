@@ -6,10 +6,15 @@
 
 class Instruction {
 public:
-	Instruction();
+	Instruction(Instruction const & src);
+	~Instruction(void);
+
+	Instruction & operator=(Instruction const & rhs);
 private:
+	Instruction(void);
+
 	eInstructionType _type;
-	IOperand	*value;
+	IOperand	*_value;
 };
 
 #endif

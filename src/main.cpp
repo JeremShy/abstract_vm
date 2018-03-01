@@ -30,7 +30,7 @@ std::string	get_instructions_from_stdin()
 		if (line == ";;")
 		{
 			//TODO : remove the exception flags on std::cin ?
-			return (ret);
+			return ret;
 		}
 		if (!first)
 			ret += '\n' + line;
@@ -54,16 +54,23 @@ int main(int ac, char **av)
 	if (ac > 2)
 	{
 		std::cout << "Usage: " << av[0] << " [file]" << std::endl;
-		return (-1);
+		return -1;
 	}
 
-	std::string	instructions;
+	std::string	file;
+	std::vector<Token> tokens;
+	std::vector<Instruction> instructions;
+	Parser parser;
+
 	if (ac == 1)
-		instructions = get_instructions_from_stdin();
+		file = get_instructions_from_stdin();
 	else
-		instructions = get_instructions_from_file(av[1]);
+		file = get_instructions_from_file(av[1]);
 	try {
-		std::vector<Token> tokens = lexer(instructions);
+		tokens = lexer(file);
+		std::cout << std::endl;
+		parser.setToken(tokens);
+		instructions = parser.getInstructions();
 	} catch (const LexicalException & e) {
 		std::cout << "An error occured during lexical analysis:" << std::endl;
 		std::cout << '\t' << e.what() << std::endl;
