@@ -7,7 +7,7 @@
 class Instruction {
 public:
 	Instruction(eInstructionType type);
-	Instruction(eInstructionType type, IOperand *value);
+	Instruction(eInstructionType type, const IOperand *value);
 
 	Instruction(Instruction const & src);
 	~Instruction(void);
@@ -17,7 +17,7 @@ private:
 	Instruction(void);
 
 	eInstructionType _type;
-	IOperand	*_value;
+	const IOperand	*_value;
 };
 
 #endif

@@ -5,7 +5,8 @@ SRC_NAME =	main.cpp \
 			LexicalException.cpp \
 			Parser.cpp \
 			Instruction.cpp \
-			ParserStates.cpp
+			ParserStates.cpp \
+			OperandFactory.cpp
 
 INC_PATH = ./includes/
 OBJ_PATH = ./obj/

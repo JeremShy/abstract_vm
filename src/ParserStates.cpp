@@ -54,5 +54,78 @@ void	Parser::stateExpectingValue(void)
 
 void	Parser::stateExpectingOpeningBracket(void)
 {
-	
+	if (_iterator->getType() == TOK_OPERATOR)
+	{
+		if (_iterator->getContent() == "(")
+		{
+			eInstructionType type;
+
+			type = _currentTypeSpecifier->getInstructionType();
+			if (type == TypeDouble || type == TypeFloat)
+				_state = ExpectingDecimalNumber;
+			else
+				_state = ExpectingRelativeNumber;
+		}
+		else
+			throw LexicalException("Expected a `(' but got [" + _iterator->getContent() + "] on line " + std::to_string(_iterator->getLine()));
+	}
+	else
+		throw LexicalException("Expected a `(' but got [" + _iterator->getContent() + "] on line " + std::to_string(_iterator->getLine()));
+}
+
+void	Parser::stateExpectingRelativeNumber(void)
+{
+	if (_iterator->getType() == TOK_INTEGER)
+	{
+		const IOperand *operand;
+
+		operand = createCurrentOperand();
+		_instructions.push_back(Instruction(_currentInstructionSpecifier->getInstructionType(), operand));
+		_state = ExpectingClosingBracket;
+	}
+	else
+	{
+		throw LexicalException("Expected a relative number but got [" + _iterator->getContent() + "] on line " + std::to_string(_iterator->getLine()));
+	}
+}
+
+void	Parser::stateExpectingDecimalNumber(void)
+{
+	if (_iterator->getType() == TOK_REAL)
+	{
+		const IOperand *operand;
+
+		operand = createCurrentOperand();
+		_instructions.push_back(Instruction(_currentInstructionSpecifier->getInstructionType(), operand));
+		_state = ExpectingClosingBracket;
+	}
+	else
+	{
+		throw LexicalException("Expected a decimal number but got [" + _iterator->getContent() + "] on line " + std::to_string(_iterator->getLine()));
+	}
+}
+
+void	Parser::stateExpectingClosingBracket(void)
+{
+	if (_iterator->getType() == TOK_OPERATOR)
+	{
+		if (_iterator->getContent() == ")")
+		{
+			_state = ExpectingSeparator;
+		}
+		else
+			throw LexicalException("Expected a `)' but got [" + _iterator->getContent() + "] on line " + std::to_string(_iterator->getLine()));
+	}
+	else
+		throw LexicalException("Expected a `)' but got [" + _iterator->getContent() + "] on line " + std::to_string(_iterator->getLine()));
+}
+
+void	Parser::stateExpectingSeparator(void)
+{
+	if (_iterator->getType() == TOK_SEP)
+	{
+		_state = Start;
+	}
+	else
+		throw LexicalException("Expected a separator but got [" + _iterator->getContent() + "] on line " + std::to_string(_iterator->getLine()));
 }

@@ -4,7 +4,7 @@
 Instruction::Instruction(eInstructionType type) : _type(type)
 {
 }
-Instruction::Instruction(eInstructionType type, IOperand *value) : _type(type), _value(value)
+Instruction::Instruction(eInstructionType type, const IOperand *value) : _type(type), _value(value)
 {
 }
 

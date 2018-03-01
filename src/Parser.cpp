@@ -4,8 +4,22 @@ std::map<eParserState, void (Parser::*)(void)> Parser::_stateMap =
 {
 	{Start, &Parser::stateStart},
 	{ExpectingValue, &Parser::stateExpectingValue},
-	{ExpectingOpeningBracket, &Parser::stateExpectingOpeningBracket}
+	{ExpectingOpeningBracket, &Parser::stateExpectingOpeningBracket},
+	{ExpectingRelativeNumber, &Parser::stateExpectingRelativeNumber},
+	{ExpectingDecimalNumber, &Parser::stateExpectingDecimalNumber},
+	{ExpectingClosingBracket, &Parser::stateExpectingClosingBracket},
+	{ExpectingSeparator, &Parser::stateExpectingSeparator}
 };
+
+std::map<eInstructionType, eOperandType> Parser::_typeMap
+{
+	{TypeInt8, Int8},
+	{TypeInt16, Int16},
+	{TypeInt32, Int32},
+	{TypeFloat, Float},
+	{TypeDouble, Double}
+};
+
 
 Parser::Parser(std::vector<Token> const & tokens) : _tokens(tokens), _state(Start)
 {
@@ -60,4 +74,27 @@ Parser & Parser::operator=(Parser const & rhs)
 	_tokens = rhs._tokens;
 	_state = rhs._state;
 	return *this;
+}
+
+eOperandType	Parser::instructionToOperand(eInstructionType src)
+{
+	std::map<eInstructionType, eOperandType>::iterator it;
+
+	it = _typeMap.find(src);
+	if (it != _typeMap.end())
+		return it->second;
+	throw LexicalException("Error !");
+}
+
+const IOperand	*Parser::createCurrentOperand()
+{
+	const IOperand			*operand;
+	eInstructionType		instructionType;
+	eOperandType			operandType;
+
+	instructionType = _currentTypeSpecifier->getInstructionType();
+	operandType = instructionToOperand(instructionType);
+	operand = operandFactory.createOperand(operandType, _iterator->getContent());
+
+	return (operand);
 }
