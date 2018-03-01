@@ -6,7 +6,8 @@
 # include <Instruction.hpp>
 
 enum eParserState {
-	Start // Just after a separator
+	Start, // Just after a separator
+	ExpectingValue // after a push or an assert.
 };
 
 class Parser {
@@ -26,7 +27,14 @@ private:
 
 	std::vector<Token> _tokens;
 	eParserState _state;
-	std::vector<Token>::iterator _iterator;
+	std::vector<Token>::iterator	_iterator;
+	std::vector<Token>::iterator	_previousInstruction;
+
+	std::vector<Instruction> _instructions;
+
+
+	void	stateStart(void);
+	void	stateExpectingValue(void);
 };
 
 #endif

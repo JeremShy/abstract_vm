@@ -13,6 +13,11 @@ enum eInstructionType {
 	Mod,
 	Print,
 	Exit,
+	Int8,
+	Int16,
+	Int32,
+	Float,
+	Double,
 	Undefined
 };
 

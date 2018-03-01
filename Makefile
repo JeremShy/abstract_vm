@@ -15,7 +15,7 @@ NAME = ./avm
 CC = /usr/bin/clang++
 
 #CFLAGS = -Wall -Werror -Wextra -g
-CFLAGS = -Wall -Wextra -g
+CFLAGS = -Wall -Wextra -g -std=c++11
 
 SRC_PATH = ./src/
 

@@ -3,6 +3,8 @@
 
 # include <string>
 # include <iostream>
+# include <map>
+# include <eInstructionType.hpp>
 
 typedef enum {
 	TOK_STRING,
@@ -32,9 +34,12 @@ public:
 	std::string	getTypeAsStr(void) const;
 	std::string const & getContent(void) const;
 
+	eInstructionType getInstructionType(void) const;
+
 private:
 
-	static std::string enumStr[TOK_SIZEOFENUM];
+	static std::string _enumStr[TOK_SIZEOFENUM];
+	static std::map<const std::string, eInstructionType> _typeMap;
 
 	eTokenType _type;
 	std::string _content;

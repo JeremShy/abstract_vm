@@ -6,6 +6,9 @@
 
 class Instruction {
 public:
+	Instruction(eInstructionType type);
+	Instruction(eInstructionType type, IOperand *value);
+
 	Instruction(Instruction const & src);
 	~Instruction(void);
 

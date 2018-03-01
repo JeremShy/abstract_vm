@@ -1,12 +1,33 @@
 #include <Token.hpp>
 
-std::string Token::enumStr[TOK_SIZEOFENUM] = {
+std::string Token::_enumStr[TOK_SIZEOFENUM] = {
    "string",
    "integer",
    "real",
    "operator",
    "separator"
 };
+
+std::map<const std::string, eInstructionType> Token::_typeMap =
+{
+	{"push", Push},
+	{"pop", Pop},
+	{"dump", Dump},
+	{"assert", Assert},
+	{"add", Add},
+	{"sub", Sub},
+	{"mul", Mul},
+	{"div", Div},
+	{"mod", Mod},
+	{"print", Print},
+	{"exit", Exit},
+	{"int8", Int8},
+	{"int16", Int16},
+	{"int32", Int32},
+	{"float", Float},
+	{"double", Double},
+};
+
 
 Token::Token(void)
 {
@@ -55,7 +76,7 @@ size_t		Token::getLine(void) const
 
 std::string	Token::getTypeAsStr(void) const
 {
-	return enumStr[_type];
+	return _enumStr[_type];
 }
 
 void		Token::setType(eTokenType type)
@@ -66,4 +87,15 @@ void		Token::setType(eTokenType type)
 std::string const & Token::getContent(void) const
 {
 	return _content;
+}
+
+eInstructionType Token::getInstructionType(void) const
+{
+	std::map<const std::string, eInstructionType>::iterator elem;
+
+	elem = _typeMap.find(_content);
+	if (elem == _typeMap.end())
+		return Undefined;
+	else
+		return elem->second;
 }
