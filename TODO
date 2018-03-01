@@ -1,2 +1,2 @@
 TODO:
-Check Coplien's forms. (Any class that declares at least one attribute must be written in canonical form.)
+	Create the int8 int16... classes and complete OperandFactory creation methods with them.
