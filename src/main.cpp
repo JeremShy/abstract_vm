@@ -30,7 +30,7 @@ std::string	get_instructions_from_stdin()
 		if (line == ";;")
 		{
 			//TODO : remove the exception flags on std::cin ?
-			return ret;
+			return ret + '\n';
 		}
 		if (!first)
 			ret += '\n' + line;
@@ -66,13 +66,20 @@ int main(int ac, char **av)
 		file = get_instructions_from_stdin();
 	else
 		file = get_instructions_from_file(av[1]);
+
 	try {
 		tokens = lexer(file);
 		std::cout << std::endl;
+	} catch (const LexicalException & e) {
+		std::cout << "An error occured during lexical analysis:" << std::endl;
+		std::cout << '\t' << e.what() << std::endl;
+	}
+
+	try {
 		parser.setToken(tokens);
 		instructions = parser.getInstructions();
 	} catch (const LexicalException & e) {
-		std::cout << "An error occured during lexical analysis:" << std::endl;
+		std::cout << "An error occured during syntactic analysis:" << std::endl;
 		std::cout << '\t' << e.what() << std::endl;
 	}
 }
