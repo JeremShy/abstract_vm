@@ -21,11 +21,11 @@ std::map<const std::string, eInstructionType> Token::_typeMap =
 	{"mod", Mod},
 	{"print", Print},
 	{"exit", Exit},
-	{"int8", Int8},
-	{"int16", Int16},
-	{"int32", Int32},
-	{"float", Float},
-	{"double", Double},
+	{"int8", TypeInt8},
+	{"int16", TypeInt16},
+	{"int32", TypeInt32},
+	{"float", TypeFloat},
+	{"double", TypeDouble},
 };
 
 

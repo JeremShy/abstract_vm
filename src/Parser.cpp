@@ -1,44 +1,14 @@
 #include <Parser.hpp>
-#include <LexicalException.hpp>
-#include <vector>
+
+std::map<eParserState, void (Parser::*)(void)> Parser::_stateMap =
+{
+	{Start, &Parser::stateStart},
+	{ExpectingValue, &Parser::stateExpectingValue},
+	{ExpectingOpeningBracket, &Parser::stateExpectingOpeningBracket}
+};
 
 Parser::Parser(std::vector<Token> const & tokens) : _tokens(tokens), _state(Start)
 {
-}
-
-void Parser::stateStart(void)
-{
-	if (_iterator->getType() == TOK_STRING)
-	{
-		eInstructionType type;
-
-		type = _iterator->getInstructionType();;
-		if (type == Push || type == Assert)
-		{
-			std::cout << "Push or Assert instruction. Expecting an argument..." << std::endl;
-			_previousInstruction = _iterator;
-			_state = ExpectingValue;
-		}
-		else if (type == Undefined)
-			throw LexicalException("Undefined Token [" + _iterator->getContent() + "] on line " + std::to_string(_iterator->getLine()));
-		else if (type == Int8 || type == Int16 || type == Int32 || type == Float || type == Double)
-			throw LexicalException("Unexpected value specifier [" + _iterator->getContent() + "] on line " + std::to_string(_iterator->getLine()));
-		else
-			_instructions.push_back(Instruction(type));
-	}
-	else if (_iterator->getType() == TOK_SEP)
-	{
-		std::cout << "Separator found." << std::endl;
-	}
-	else
-	{
-		throw LexicalException("Unexpected Token [" + _iterator->getContent() + "] on line " + std::to_string(_iterator->getLine()));
-	}
-}
-
-void	Parser::stateExpectingValue(void)
-{
-
 }
 
 std::vector<Instruction>	Parser::getInstructions()
@@ -51,10 +21,13 @@ std::vector<Instruction>	Parser::getInstructions()
 
 	while (_iterator != _tokens.end())
 	{
-		if (_state == Start)
-			stateStart();
-		else if (_state == ExpectingValue)
-			stateExpectingValue();
+		std::map<eParserState, void (Parser::*)(void)>::iterator it;
+
+		it = _stateMap.find(_state);
+		if (it != _stateMap.end())
+		{
+			throw LexicalException("Didn't expect this state !");
+		}
 		_iterator++;
 	}
 

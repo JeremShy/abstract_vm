@@ -4,8 +4,8 @@ SRC_NAME =	main.cpp \
 			Token.cpp \
 			LexicalException.cpp \
 			Parser.cpp \
-			Instruction.cpp
-
+			Instruction.cpp \
+			ParserStates.cpp
 
 INC_PATH = ./includes/
 OBJ_PATH = ./obj/
