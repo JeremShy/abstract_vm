@@ -1,51 +1,115 @@
 #ifndef OPERANDTEMPLATE_HPP
 # define OPERANDTEMPLATE_HPP
-#include <IOperand.hpp>
+
+# include <IOperand.hpp>
+# include <OperandFactory.hpp>
+# include <cmath>
 
 template <typename T>
-class OperandTemplate {
+class OperandTemplate : public IOperand{
 public:
-	IOperand const * operator+( IOperand const & rhs ) const; //Sum
-	IOperand const * operator-( IOperand const & rhs ) const; //Difference
-	IOperand const * operator*( IOperand const & rhs ) const; //Product
-	IOperand const * operator/( IOperand const & rhs ) const; //Quotient
-	IOperand const * operator%( IOperand const & rhs ) const; //Modulo
+	IOperand const * operator+( IOperand const & rhs ) const;
+	IOperand const * operator-( IOperand const & rhs ) const;
+	IOperand const * operator*( IOperand const & rhs ) const;
+	IOperand const * operator/( IOperand const & rhs ) const;
+	IOperand const * operator%( IOperand const & rhs ) const;
 
-	std::string const & toString( void ) const; // String representation of the instance
+	std::string const & toString( void ) const;
 
 protected:
+	std::string	_stringRepresentation;
 	T _value;
 };
 
 template <typename T>
 std::string const & OperandTemplate<T>::toString(void) const
 {
-	std::to_string(_value);
+	return _stringRepresentation;
 }
 
 template <typename T>
 IOperand const * OperandTemplate<T>::operator+( IOperand const & rhs ) const
 {
+	eOperandType returnType = std::max(this->getType(), rhs.getType());
+
+	//TODO : Check overflow and underflow...
+	// ...
+	double rez;
+
+	rez = _value + std::stod(rhs.toString());
+
+	std::cout << "Resultat of add : " << rez << std::endl;
+
+	OperandFactory op;
+	return (op.createOperand(returnType, std::to_string(rez)));
 }
 
 template <typename T>
 IOperand const * OperandTemplate<T>::operator-( IOperand const & rhs ) const
 {
+	eOperandType returnType = std::max(this->getType(), rhs.getType());
+
+	//TODO : Check overflow and underflow...
+	// ...
+	double rez;
+
+	rez = _value - std::stod(rhs.toString());
+
+	std::cout << "Resultat of add : " << rez << std::endl;
+
+	OperandFactory op;
+	return (op.createOperand(returnType, std::to_string(rez)));
 }
 
 template <typename T>
 IOperand const * OperandTemplate<T>::operator*( IOperand const & rhs ) const
 {
+	eOperandType returnType = std::max(this->getType(), rhs.getType());
+
+	//TODO : Check overflow and underflow...
+	// ...
+	double rez;
+
+	rez = _value * std::stod(rhs.toString());
+
+	std::cout << "Resultat of add : " << rez << std::endl;
+
+	OperandFactory op;
+	return (op.createOperand(returnType, std::to_string(rez)));
 }
 
 template <typename T>
 IOperand const * OperandTemplate<T>::operator/( IOperand const & rhs ) const
 {
+	eOperandType returnType = std::max(this->getType(), rhs.getType());
+
+	//TODO : Check overflow and underflow...
+	// ...
+	double rez;
+
+	rez = _value / std::stod(rhs.toString());
+
+	std::cout << "Resultat of add : " << rez << std::endl;
+
+	OperandFactory op;
+	return (op.createOperand(returnType, std::to_string(rez)));
 }
 
 template <typename T>
 IOperand const * OperandTemplate<T>::operator%( IOperand const & rhs ) const
 {
+	eOperandType returnType = std::max(this->getType(), rhs.getType());
+
+	//TODO : Check overflow and underflow...
+	// ...
+	double rez;
+
+	rez = fmod(_value, std::stod(rhs.toString()));
+
+	std::cout << "Resultat of add : " << rez << std::endl;
+
+	OperandFactory op;
+	return (op.createOperand(returnType, std::to_string(rez)));
 }
 
 #endif

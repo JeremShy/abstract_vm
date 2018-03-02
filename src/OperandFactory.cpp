@@ -1,4 +1,5 @@
 #include <OperandFactory.hpp>
+#include <Int8.hpp>
 
 IOperand const * (OperandFactory::*OperandFactory::_hashTable[5])(std::string const &) const = {
 	&OperandFactory::createInt8,
@@ -17,7 +18,7 @@ IOperand const * OperandFactory::createOperand(eOperandType type, std::string co
 IOperand const * OperandFactory::createInt8(std::string const & value) const
 {
 	std::cout << "Called operand factory createInt8 method with value : " << value << std::endl;
-	return (NULL);
+	return (new Int8(static_cast<int8_t>(std::stod(value))));
 }
 
 IOperand const * OperandFactory::createInt16(std::string const & value) const
