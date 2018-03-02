@@ -7,6 +7,7 @@
 #include <fstream>
 #include <LexicalException.hpp>
 #include <Parser.hpp>
+#include <OperandTemplate.hpp>
 
 std::string	get_instructions_from_stdin()
 {

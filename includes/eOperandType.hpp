@@ -2,11 +2,11 @@
 # define EOPERANDTYPE_HPP
 
 typedef enum  {
-	Int8,
-	Int16,
-	Int32,
-	Float,
-	Double
+	OperandTypeInt8,
+	OperandTypeInt16,
+	OperandTypeInt32,
+	OperandTypeFloat,
+	OperandTypeDouble
 } eOperandType;
 
 #endif

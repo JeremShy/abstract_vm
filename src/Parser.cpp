@@ -13,11 +13,11 @@ std::map<eParserState, void (Parser::*)(void)> Parser::_stateMap =
 
 std::map<eInstructionType, eOperandType> Parser::_typeMap
 {
-	{TypeInt8, Int8},
-	{TypeInt16, Int16},
-	{TypeInt32, Int32},
-	{TypeFloat, Float},
-	{TypeDouble, Double}
+	{TypeInt8, OperandTypeInt8},
+	{TypeInt16, OperandTypeInt16},
+	{TypeInt32, OperandTypeInt32},
+	{TypeFloat, OperandTypeFloat},
+	{TypeDouble, OperandTypeDouble}
 };
 
 

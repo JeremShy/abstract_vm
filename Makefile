@@ -1,4 +1,5 @@
-SRC_NAME =	main.cpp \
+SRC_NAME =	Int8.cpp \
+			main.cpp \
 			lexer.cpp \
 			lexer_get.cpp \
 			Token.cpp \
