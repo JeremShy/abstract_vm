@@ -1,4 +1,8 @@
 SRC_NAME =	Int8.cpp \
+			Int16.cpp \
+			Int32.cpp \
+			Float.cpp \
+			Double.cpp \
 			main.cpp \
 			lexer.cpp \
 			lexer_get.cpp \
