@@ -30,3 +30,13 @@ Instruction & Instruction::operator=(Instruction const & rhs)
 Instruction::~Instruction(void)
 {
 }
+
+eInstructionType	Instruction::getType(void) const
+{
+	return _type;
+}
+
+const IOperand	*Instruction::getValue(void) const
+{
+	return _value;
+}

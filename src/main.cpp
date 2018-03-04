@@ -8,6 +8,7 @@
 #include <LexicalException.hpp>
 #include <Parser.hpp>
 #include <Int8.hpp>
+#include <AVM.hpp>
 
 std::string	get_instructions_from_stdin()
 {
@@ -57,11 +58,6 @@ int main(int ac, char **av)
 		std::cout << "Usage: " << av[0] << " [file]" << std::endl;
 		return -1;
 	}
-
-	const IOperand *a = new Int8(12);
-	const IOperand *b = new Int8(14);
-	const IOperand *c = *a + *b;
-
 	std::string	file;
 	std::vector<Token> tokens;
 	std::vector<Instruction> instructions;
@@ -87,4 +83,7 @@ int main(int ac, char **av)
 		std::cout << "An error occured during syntactic analysis:" << std::endl;
 		std::cout << '\t' << e.what() << std::endl;
 	}
+
+	AVM vm(instructions);
+	vm.execute();
 }

@@ -13,6 +13,9 @@ public:
 	~Instruction(void);
 
 	Instruction & operator=(Instruction const & rhs);
+
+	eInstructionType	getType(void) const;
+	const IOperand			*getValue(void) const;
 private:
 	Instruction(void);
 
