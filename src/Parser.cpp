@@ -39,7 +39,7 @@ std::vector<Instruction>	Parser::getInstructions()
 
 		it = _stateMap.find(_state);
 		if (it == _stateMap.end())
-			throw LexicalException("Didn't expect this state !");
+			throw SyntaxicException("Didn't expect this state !");
 		else
 			(this->*(it->second))();
 		_iterator++;
@@ -83,7 +83,7 @@ eOperandType	Parser::instructionToOperand(eInstructionType src)
 	it = _typeMap.find(src);
 	if (it != _typeMap.end())
 		return it->second;
-	throw LexicalException("Error !");
+	throw SyntaxicException("Error !");
 }
 
 const IOperand	*Parser::createCurrentOperand()

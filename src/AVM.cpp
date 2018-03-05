@@ -1,6 +1,6 @@
 #include <AVM.hpp>
 #include <iostream>
-#include <LexicalException.hpp>
+#include <RuntimeException.hpp>
 
 std::map<eInstructionType, void (AVM::*)(const Instruction &)> AVM::_funcMap =
 {
@@ -51,7 +51,7 @@ void	AVM::execute(void)
 		it = _funcMap.find(_instructions[actualInstruction].getType());
 		if (it == _funcMap.end())
 		{
-			throw LexicalException("Wut ? In AVM::execute()");
+			throw RuntimeException("Wut ? In AVM::execute()");
 		}
 		else
 		{
@@ -70,9 +70,12 @@ void	AVM::ExecPop(const Instruction & instruction)
 {
 	std::cout << "In ExecPop." << std::endl;
 	if (_stack.size() > 0)
+	{
+		delete _stack.top();
 		_stack.pop();
+	}
 	else
-		throw LexicalException("Pop on empty stack.\n");
+		throw RuntimeException("Pop on empty stack.\n");
 	(void)instruction;
 }
 void	AVM::ExecDump(const Instruction & instruction)
@@ -101,28 +104,68 @@ void	AVM::ExecAssert(const Instruction & instruction)
 
 void	AVM::ExecAdd(const Instruction & instruction)
 {
-	std::cout << "In ExecAdd." << std::endl;
 	(void)instruction;
+
+	std::cout << "In ExecAdd." << std::endl;
+	const IOperand	*first = pop_operand("add");
+	const IOperand	*second = pop_operand("add");
+
+	const IOperand	*added = *second + *first;
+	delete first;
+	delete second;
+	_stack.push(added);
 }
 void	AVM::ExecSub(const Instruction & instruction)
 {
-	std::cout << "In ExecSub." << std::endl;
 	(void)instruction;
+
+	std::cout << "In ExecSub." << std::endl;
+	const IOperand	*first = pop_operand("sub");
+	const IOperand	*second = pop_operand("sub");
+
+	const IOperand	*added = *second - *first;
+	delete first;
+	delete second;
+	_stack.push(added);
 }
 void	AVM::ExecMul(const Instruction & instruction)
 {
-	std::cout << "In ExecMul." << std::endl;
 	(void)instruction;
+
+	std::cout << "In ExecMul." << std::endl;
+	const IOperand	*first = pop_operand("mul");
+	const IOperand	*second = pop_operand("mul");
+
+	const IOperand	*added = *second * *first;
+	delete first;
+	delete second;
+	_stack.push(added);
 }
 void	AVM::ExecDiv(const Instruction & instruction)
 {
-	std::cout << "In ExecDiv." << std::endl;
 	(void)instruction;
+
+	std::cout << "In ExecDiv." << std::endl;
+	const IOperand	*first = pop_operand("div");
+	const IOperand	*second = pop_operand("div");
+
+	const IOperand	*added = *second / *first;
+	delete first;
+	delete second;
+	_stack.push(added);
 }
 void	AVM::ExecMod(const Instruction & instruction)
 {
-	std::cout << "In ExecMod." << std::endl;
 	(void)instruction;
+
+	std::cout << "In ExecMod." << std::endl;
+	const IOperand	*first = pop_operand("mod");
+	const IOperand	*second = pop_operand("mod");
+
+	const IOperand	*added = *second % *first;
+	delete first;
+	delete second;
+	_stack.push(added);
 }
 void	AVM::ExecPrint(const Instruction & instruction)
 {
@@ -133,4 +176,18 @@ void	AVM::ExecExit(const Instruction & instruction)
 {
 	std::cout << "In ExecExit." << std::endl;
 	(void)instruction;
+}
+
+const IOperand	*AVM::pop_operand(std::string operation)
+{
+	if (_stack.size() > 0)
+	{
+		const IOperand *ret = _stack.top();
+		_stack.pop();
+		return (ret);
+	}
+	else
+	{
+		throw RuntimeException("Stack must have at least two instructions to execute the " + operation + " operation.");
+	}
 }

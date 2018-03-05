@@ -6,6 +6,7 @@
 #include <Token.hpp>
 #include <fstream>
 #include <LexicalException.hpp>
+#include <RuntimeException.hpp>
 #include <Parser.hpp>
 #include <Int8.hpp>
 #include <AVM.hpp>
@@ -79,11 +80,16 @@ int main(int ac, char **av)
 	try {
 		parser.setToken(tokens);
 		instructions = parser.getInstructions();
-	} catch (const LexicalException & e) {
+	} catch (const SyntaxicException & e) {
 		std::cout << "An error occured during syntactic analysis:" << std::endl;
 		std::cout << '\t' << e.what() << std::endl;
 	}
 
-	AVM vm(instructions);
-	vm.execute();
+	try {
+		AVM vm(instructions);
+		vm.execute();
+	} catch (const RuntimeException & e) {
+		std::cout << "An error occured during execution analysis:" << std::endl;
+		std::cout << '\t' << e.what() << std::endl;
+	}
 }

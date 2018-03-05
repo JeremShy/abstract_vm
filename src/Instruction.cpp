@@ -1,5 +1,5 @@
 #include <Instruction.hpp>
-#include <LexicalException.hpp>
+#include <SyntaxicException.hpp>
 
 Instruction::Instruction(eInstructionType type) : _type(type)
 {
@@ -16,7 +16,7 @@ Instruction::Instruction (Instruction const & src)
 
 Instruction::Instruction(void)
 {
-	throw LexicalException("Tried to call private constructor of Instruction.");
+	throw SyntaxicException("Tried to call private constructor of Instruction.");
 }
 
 Instruction & Instruction::operator=(Instruction const & rhs)

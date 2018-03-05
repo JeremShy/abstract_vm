@@ -4,6 +4,7 @@
 # include <IOperand.hpp>
 # include <OperandFactory.hpp>
 # include <cmath>
+# include <RuntimeException.hpp>
 
 template <typename T>
 class OperandTemplate : public IOperand{
@@ -87,6 +88,11 @@ IOperand const * OperandTemplate<T>::operator/( IOperand const & rhs ) const
 	// ...
 	double rez;
 
+	if (std::stod(rhs.toString()) == 0)
+	{
+		throw RuntimeException("Division by zero.");
+	}
+
 	rez = _value / std::stod(rhs.toString());
 
 	std::cout << "Resultat of add : " << rez << std::endl;
@@ -103,6 +109,11 @@ IOperand const * OperandTemplate<T>::operator%( IOperand const & rhs ) const
 	//TODO : Check overflow and underflow...
 	// ...
 	double rez;
+
+	if (std::stod(rhs.toString()) == 0)
+	{
+		throw RuntimeException("Division by zero.");
+	}
 
 	rez = fmod(_value, std::stod(rhs.toString()));
 

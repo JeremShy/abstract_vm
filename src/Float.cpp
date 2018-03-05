@@ -9,7 +9,7 @@ Float::Float(float value)
 {
 	this->_value = value;
 	this->_stringRepresentation = std::to_string(value);
-	std::cout << "Creating an Float object with value : " << std::to_string(_value) << std::endl;
+	std::cout << "Creating a Float object with value : " << std::to_string(_value) << std::endl;
 }
 
 Float::Float(Float const & src)

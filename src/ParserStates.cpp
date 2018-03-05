@@ -14,9 +14,9 @@ void Parser::stateStart(void)
 			_state = ExpectingValue;
 		}
 		else if (type == Undefined)
-			throw LexicalException("Undefined Token : [" + _iterator->getContent() + "] on line " + std::to_string(_iterator->getLine()));
+			throw SyntaxicException("Undefined Token : [" + _iterator->getContent() + "] on line " + std::to_string(_iterator->getLine()));
 		else if (type == TypeInt8 || type == TypeInt16 || type == TypeInt32 || type == TypeFloat || type == TypeDouble)
-			throw LexicalException("Unexpected value specifier : [" + _iterator->getContent() + "] on line " + std::to_string(_iterator->getLine()));
+			throw SyntaxicException("Unexpected value specifier : [" + _iterator->getContent() + "] on line " + std::to_string(_iterator->getLine()));
 		else
 		{
 			_instructions.push_back(Instruction(type));
@@ -29,7 +29,7 @@ void Parser::stateStart(void)
 	}
 	else
 	{
-		throw LexicalException("Unexpected Token [" + _iterator->getContent() + "] on line " + std::to_string(_iterator->getLine()));
+		throw SyntaxicException("Unexpected Token [" + _iterator->getContent() + "] on line " + std::to_string(_iterator->getLine()));
 	}
 }
 
@@ -47,12 +47,12 @@ void	Parser::stateExpectingValue(void)
 			_state = ExpectingOpeningBracket;
 		}
 		else if (type != Undefined)
-			throw LexicalException("Expected value specifier but got [" + _iterator->getContent() + "] on line " + std::to_string(_iterator->getLine()));
+			throw SyntaxicException("Expected value specifier but got [" + _iterator->getContent() + "] on line " + std::to_string(_iterator->getLine()));
 		else
-			throw LexicalException("Undefined Token [" + _iterator->getContent() + "] on line " + std::to_string(_iterator->getLine()));
+			throw SyntaxicException("Undefined Token [" + _iterator->getContent() + "] on line " + std::to_string(_iterator->getLine()));
 	}
 	else
-		throw LexicalException("Unexpected Token [" + _iterator->getContent() + "] on line " + std::to_string(_iterator->getLine()));
+		throw SyntaxicException("Unexpected Token [" + _iterator->getContent() + "] on line " + std::to_string(_iterator->getLine()));
 }
 
 void	Parser::stateExpectingOpeningBracket(void)
@@ -70,10 +70,10 @@ void	Parser::stateExpectingOpeningBracket(void)
 				_state = ExpectingRelativeNumber;
 		}
 		else
-			throw LexicalException("Expected a `(' but got [" + _iterator->getContent() + "] on line " + std::to_string(_iterator->getLine()));
+			throw SyntaxicException("Expected a `(' but got [" + _iterator->getContent() + "] on line " + std::to_string(_iterator->getLine()));
 	}
 	else
-		throw LexicalException("Expected a `(' but got [" + _iterator->getContent() + "] on line " + std::to_string(_iterator->getLine()));
+		throw SyntaxicException("Expected a `(' but got [" + _iterator->getContent() + "] on line " + std::to_string(_iterator->getLine()));
 }
 
 void	Parser::stateExpectingRelativeNumber(void)
@@ -88,7 +88,7 @@ void	Parser::stateExpectingRelativeNumber(void)
 	}
 	else
 	{
-		throw LexicalException("Expected a relative number but got [" + _iterator->getContent() + "] on line " + std::to_string(_iterator->getLine()));
+		throw SyntaxicException("Expected a relative number but got [" + _iterator->getContent() + "] on line " + std::to_string(_iterator->getLine()));
 	}
 }
 
@@ -104,7 +104,7 @@ void	Parser::stateExpectingDecimalNumber(void)
 	}
 	else
 	{
-		throw LexicalException("Expected a decimal number but got [" + _iterator->getContent() + "] on line " + std::to_string(_iterator->getLine()));
+		throw SyntaxicException("Expected a decimal number but got [" + _iterator->getContent() + "] on line " + std::to_string(_iterator->getLine()));
 	}
 }
 
@@ -117,10 +117,10 @@ void	Parser::stateExpectingClosingBracket(void)
 			_state = ExpectingSeparator;
 		}
 		else
-			throw LexicalException("Expected a `)' but got [" + _iterator->getContent() + "] on line " + std::to_string(_iterator->getLine()));
+			throw SyntaxicException("Expected a `)' but got [" + _iterator->getContent() + "] on line " + std::to_string(_iterator->getLine()));
 	}
 	else
-		throw LexicalException("Expected a `)' but got [" + _iterator->getContent() + "] on line " + std::to_string(_iterator->getLine()));
+		throw SyntaxicException("Expected a `)' but got [" + _iterator->getContent() + "] on line " + std::to_string(_iterator->getLine()));
 }
 
 void	Parser::stateExpectingSeparator(void)
@@ -130,5 +130,5 @@ void	Parser::stateExpectingSeparator(void)
 		_state = Start;
 	}
 	else
-		throw LexicalException("Expected a separator but got [" + _iterator->getContent() + "] on line " + std::to_string(_iterator->getLine()));
+		throw SyntaxicException("Expected a separator but got [" + _iterator->getContent() + "] on line " + std::to_string(_iterator->getLine()));
 }

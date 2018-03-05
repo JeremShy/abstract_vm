@@ -8,6 +8,8 @@ SRC_NAME =	Int8.cpp \
 			lexer_get.cpp \
 			Token.cpp \
 			LexicalException.cpp \
+			SyntaxicException.cpp \
+			RuntimeException.cpp \
 			Parser.cpp \
 			Instruction.cpp \
 			ParserStates.cpp \

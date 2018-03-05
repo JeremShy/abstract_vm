@@ -3,7 +3,7 @@
 
 # include <Token.hpp>
 # include <Instruction.hpp>
-# include <LexicalException.hpp>
+# include <SyntaxicException.hpp>
 # include <vector>
 # include <map>
 # include <eOperandType.hpp>

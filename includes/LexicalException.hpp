@@ -7,7 +7,7 @@
 class LexicalException : public std::exception
 {
 private:
-	char _what[64];
+	char _what[128];
 	LexicalException(void);
 	LexicalException & operator=(LexicalException const & rhs);
 
