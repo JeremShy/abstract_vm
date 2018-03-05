@@ -1,0 +1,6 @@
+; ------------
+push int8(1)
+push int32(42) ;  abc
+ ;;
+dump 
+; comment

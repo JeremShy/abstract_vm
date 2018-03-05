@@ -25,11 +25,15 @@ bool isseparator(char c)
 		return false;
 }
 
-static void passCommentary(std::string str, size_t &i, size_t &lineNumber)
+static void passCommentary(std::string str, size_t &i)
 {
+	if (i == 0 && str.length() > 2)
+	{
+		throw LexicalException("Unexpected ;;");
+	}
 	while (i < str.length() and str[i] != '\n')
 		i++;
-	lineNumber++;
+	i--;
 }
 
 static void passSpaces(std::string str, size_t &i)
@@ -68,7 +72,7 @@ std::vector<Token> lexer(std::string arg)
 		}
 		else if (str[i] == ';')
 		{
-			passCommentary(str, i, lineNumber);
+			passCommentary(str, i);
 		}
 		else if (isspace(str[i])) //space
 		{

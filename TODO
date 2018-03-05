@@ -1,2 +1,4 @@
 TODO:
 	Erreur lorsque ;; lorsqu'on lit depuis un fichier
+	Gerer les commentaires en fin de ligne
+	Afficher les flottants que jusqu'a la derniere decimale utile (genre pas 1.1000)
