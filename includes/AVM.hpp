@@ -19,7 +19,6 @@ public:
 	void	execute(void);
 
 private:
-
 	static std::map<eInstructionType, void (AVM::*)(const Instruction &)> _funcMap;
 
 	AVM(void);
@@ -40,6 +39,5 @@ private:
 	void	ExecExit(const Instruction & _instruction);
 
 	const IOperand *pop_operand(std::string operation);
-
 };
 #endif

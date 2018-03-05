@@ -45,7 +45,6 @@ void	AVM::execute(void)
 	size_t	actualInstruction = 0;
 	std::map<eInstructionType, void (AVM::*)(const Instruction &)>::iterator it;
 
-
 	while (actualInstruction < _instructions.size())
 	{
 		it = _funcMap.find(_instructions[actualInstruction].getType());
@@ -195,7 +194,5 @@ const IOperand	*AVM::pop_operand(std::string operation)
 		return (ret);
 	}
 	else
-	{
 		throw RuntimeException("Stack must have at least two instructions to execute the " + operation + " operation.");
-	}
 }
