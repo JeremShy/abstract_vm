@@ -21,32 +21,88 @@ IOperand const * OperandFactory::createOperand(eOperandType type, std::string co
 
 IOperand const * OperandFactory::createInt8(std::string const & value) const
 {
-	std::cout << "Called operand factory createInt8 method with value : " << value << std::endl;
-	return (new Int8(static_cast<int8_t>(std::stod(value))));
+	// std::cout << "Called operand factory createInt8 method with value : " << value << std::endl;
+	double dvalue = 0;
+	try {
+		dvalue = std::stod(value);
+	} catch (std::out_of_range const & e)
+	{
+		throw RuntimeException("Out of range, this value could not fit in an int8");
+	}
+
+	if (dvalue < std::numeric_limits<int8_t>::min())
+		throw RuntimeException("Underflow : tried to store " + value + " in an int8.");
+	else if (dvalue > std::numeric_limits<int8_t>::max())
+		throw RuntimeException("Overflow : tried to store " + value + " in an int8.");
+	return (new Int8(static_cast<int8_t>(dvalue)));
 }
 
 IOperand const * OperandFactory::createInt16(std::string const & value) const
 {
-	std::cout << "Called operand factory createInt16 method with value : " << value << std::endl;
+	// std::cout << "Called operand factory createInt16 method with value : " << value << std::endl;
+	double dvalue = 0;
+	try {
+		dvalue = std::stod(value);
+	} catch (std::out_of_range const & e)
+	{
+		throw RuntimeException("Out of range, this value could not fit in an int16");
+	}
+
+	if (dvalue < std::numeric_limits<int16_t>::min())
+		throw RuntimeException("Underflow : tried to store " + value + " in an int16.");
+	else if (dvalue > std::numeric_limits<int16_t>::max())
+		throw RuntimeException("Overflow : tried to store " + value + " in an int16.");
 	return (new Int16(static_cast<int16_t>(std::stod(value))));
 }
 
 IOperand const * OperandFactory::createInt32(std::string const & value) const
 {
-	std::cout << "Called operand factory createInt32 method with value : " << value << std::endl;
+	// std::cout << "Called operand factory createInt32 method with value : " << value << std::endl;
+	double dvalue = 0;
+	try {
+		dvalue = std::stod(value);
+	} catch (std::out_of_range const & e)
+	{
+		throw RuntimeException("Out of range, this value could not fit in an int32");
+	}
+
+	if (dvalue < std::numeric_limits<int32_t>::min())
+		throw RuntimeException("Underflow : tried to store " + value + " in an int32.");
+	else if (dvalue > std::numeric_limits<int32_t>::max())
+		throw RuntimeException("Overflow : tried to store " + value + " in an int32.");
 	return (new Int32(static_cast<int32_t>(std::stod(value))));
 }
 
 IOperand const * OperandFactory::createFloat(std::string const & value) const
 {
-	std::cout << "Called operand factory createFloat method with value : " << value << std::endl;
+	// std::cout << "Called operand factory createFloat method with value : " << value << std::endl;
+	double dvalue = 0;
+	try {
+		dvalue = std::stod(value);
+	} catch (std::out_of_range const & e)
+	{
+		throw RuntimeException("Out of range, this value could not fit in a float");
+	}
+
+	if (dvalue < std::numeric_limits<float>::min())
+		throw RuntimeException("Underflow : tried to store " + value + " in a float.");
+	else if (dvalue > std::numeric_limits<float>::max())
+		throw RuntimeException("Overflow : tried to store " + value + " in a float.");
 	return (new Float(static_cast<float>(std::stod(value))));
 }
 
 IOperand const * OperandFactory::createDouble(std::string const & value) const
 {
-	std::cout << "Called operand factory createDouble method with value : " << value << std::endl;
-	return (new Double(std::stod(value)));
+	// std::cout << "Called operand factory createDouble method with value : " << value << std::endl;
+	double dvalue = 0;
+	try {
+		dvalue = std::stod(value);
+	} catch (std::out_of_range const & e)
+	{
+		throw RuntimeException("Out of range, this value could not fit in a double");
+	}
+
+	return (new Double(dvalue));
 }
 
 OperandFactory::OperandFactory(void)

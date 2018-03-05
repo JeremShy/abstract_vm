@@ -5,6 +5,14 @@
 # include <iostream>
 # include <IOperand.hpp>
 
+# define INT8_MIN -128
+# define INT8_MAX 127
+# define INT16_MIN -32768
+# define INT16_MAX 32767
+# define INT32_MAX 2147483647
+
+# include <cfloat>
+
 // typedef IOperand const * (OperandFactory::*t_operand_factory_func)(std::string const &)const;
 
 class OperandFactory {

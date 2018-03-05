@@ -46,7 +46,7 @@ std::vector<Token> lexer(std::string arg)
 	std::vector<Token> ret;
 	size_t	lineNumber;
 
-	std::cout << "Analyzing string : [" << str << "]" << std::endl;
+	// std::cout << "Analyzing string : [" << str << "]" << std::endl;
 	lineNumber = 1;
 	for (size_t i = 0; i < str.length(); i++)
 	{

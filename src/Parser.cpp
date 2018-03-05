@@ -30,7 +30,7 @@ std::vector<Instruction>	Parser::getInstructions()
 	/*
 		Create an instruction list from the tokens.
 	*/
-	std::cout << "Starting to compute the instructions from the tokens." << std::endl;
+	// std::cout << "Starting to compute the instructions from the tokens." << std::endl;
 	_iterator = _tokens.begin();
 
 	while (_iterator != _tokens.end())
@@ -50,13 +50,13 @@ std::vector<Instruction>	Parser::getInstructions()
 
 Parser::Parser(void)
 {
-	std::cout << "Creating a parser." << std::endl;
+	// std::cout << "Creating a parser." << std::endl;
 	_state = Start;
 }
 
 void Parser::setToken(std::vector<Token> const & tokens)
 {
-	std::cout << "Setting a token for the parser." << std::endl;
+	// std::cout << "Setting a token for the parser." << std::endl;
 	_tokens = tokens;
 }
 

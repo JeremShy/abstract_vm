@@ -15,12 +15,36 @@ public:
 	IOperand const * operator/( IOperand const & rhs ) const;
 	IOperand const * operator%( IOperand const & rhs ) const;
 
+	bool operator==( IOperand const & rhs ) const;
+	bool operator!=( IOperand const & rhs ) const;
+
+
 	std::string const & toString( void ) const;
 
 protected:
 	std::string	_stringRepresentation;
 	T _value;
 };
+
+template<typename T>
+bool OperandTemplate<T>::operator==( IOperand const & rhs ) const
+{
+	if (rhs.getType() != this->getType() ||
+		rhs.toString() != this->toString())
+		return false;
+	else
+		return true;
+}
+
+template<typename T>
+bool OperandTemplate<T>::operator!=( IOperand const & rhs ) const
+{
+	if (*this == rhs)
+		return false;
+	else
+		return true;
+}
+
 
 template <typename T>
 std::string const & OperandTemplate<T>::toString(void) const
@@ -32,9 +56,6 @@ template <typename T>
 IOperand const * OperandTemplate<T>::operator+( IOperand const & rhs ) const
 {
 	eOperandType returnType = std::max(this->getType(), rhs.getType());
-
-	//TODO : Check overflow and underflow...
-	// ...
 	double rez;
 
 	rez = _value + std::stod(rhs.toString());
@@ -49,9 +70,6 @@ template <typename T>
 IOperand const * OperandTemplate<T>::operator-( IOperand const & rhs ) const
 {
 	eOperandType returnType = std::max(this->getType(), rhs.getType());
-
-	//TODO : Check overflow and underflow...
-	// ...
 	double rez;
 
 	rez = _value - std::stod(rhs.toString());
@@ -66,9 +84,6 @@ template <typename T>
 IOperand const * OperandTemplate<T>::operator*( IOperand const & rhs ) const
 {
 	eOperandType returnType = std::max(this->getType(), rhs.getType());
-
-	//TODO : Check overflow and underflow...
-	// ...
 	double rez;
 
 	rez = _value * std::stod(rhs.toString());
@@ -83,9 +98,6 @@ template <typename T>
 IOperand const * OperandTemplate<T>::operator/( IOperand const & rhs ) const
 {
 	eOperandType returnType = std::max(this->getType(), rhs.getType());
-
-	//TODO : Check overflow and underflow...
-	// ...
 	double rez;
 
 	if (std::stod(rhs.toString()) == 0)
@@ -105,9 +117,6 @@ template <typename T>
 IOperand const * OperandTemplate<T>::operator%( IOperand const & rhs ) const
 {
 	eOperandType returnType = std::max(this->getType(), rhs.getType());
-
-	//TODO : Check overflow and underflow...
-	// ...
 	double rez;
 
 	if (std::stod(rhs.toString()) == 0)

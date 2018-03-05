@@ -84,12 +84,16 @@ int main(int ac, char **av)
 		std::cout << "An error occured during syntactic analysis:" << std::endl;
 		std::cout << '\t' << e.what() << std::endl;
 	}
+	catch (const RuntimeException & e) {
+		std::cout << "An error occured:" << std::endl;
+		std::cout << '\t' << e.what() << std::endl;
+	}
 
 	try {
 		AVM vm(instructions);
 		vm.execute();
 	} catch (const RuntimeException & e) {
-		std::cout << "An error occured during execution analysis:" << std::endl;
+		std::cout << "An error occured during runtime:" << std::endl;
 		std::cout << '\t' << e.what() << std::endl;
 	}
 }

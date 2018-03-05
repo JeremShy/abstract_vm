@@ -38,6 +38,8 @@ private:
 	void	ExecPrint(const Instruction & _instruction);
 	void	ExecExit(const Instruction & _instruction);
 
-	const IOperand *pop_operand(std::string operation);
+	const IOperand	*pop_operand(std::string operation);
+	const IOperand	*peek_operand(std::string operation);
+
 };
 #endif

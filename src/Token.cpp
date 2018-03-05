@@ -39,7 +39,7 @@ Token::Token(eTokenType type, size_t lineNumber) : _type(type), _lineNumber(line
 
 Token::Token(eTokenType type, std::string content, size_t lineNumber) : _type(type), _content(content), _lineNumber(lineNumber)
 {
-	std::cout << "Creation d'un Token avec pour contenu : [" << content << "]. type = " << type << " a la ligne " << lineNumber << std::endl;
+	// std::cout << "Creation d'un Token avec pour contenu : [" << content << "]. type = " << type << " a la ligne " << lineNumber << std::endl;
 }
 
 

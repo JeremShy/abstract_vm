@@ -100,7 +100,12 @@ void	AVM::ExecDump(const Instruction & instruction)
 void	AVM::ExecAssert(const Instruction & instruction)
 {
 	std::cout << "In ExecAssert." << std::endl;
-	(void)instruction;
+
+	const IOperand	*ok_value = instruction.getValue();
+	const IOperand	*our_value = peek_operand("assert");
+
+	if (*ok_value != *our_value)
+		throw RuntimeException("Assert failed.");
 }
 
 void	AVM::ExecAdd(const Instruction & instruction)
@@ -195,4 +200,15 @@ const IOperand	*AVM::pop_operand(std::string operation)
 	}
 	else
 		throw RuntimeException("Stack must have at least two instructions to execute the " + operation + " operation.");
+}
+
+const IOperand	*AVM::peek_operand(std::string operation)
+{
+	if (_stack.size() > 0)
+	{
+		const IOperand *ret = _stack.top();
+		return (ret);
+	}
+	else
+		throw RuntimeException("Stack must have at least one instructions to execute the " + operation + " operation.");
 }
