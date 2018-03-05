@@ -39,10 +39,7 @@ bool OperandTemplate<T>::operator==( IOperand const & rhs ) const
 template<typename T>
 bool OperandTemplate<T>::operator!=( IOperand const & rhs ) const
 {
-	if (*this == rhs)
-		return false;
-	else
-		return true;
+	return  !(*this == rhs)
 }
 
 
