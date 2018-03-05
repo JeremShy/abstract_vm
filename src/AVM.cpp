@@ -1,6 +1,7 @@
 #include <AVM.hpp>
 #include <iostream>
 #include <RuntimeException.hpp>
+#include <unistd.h>
 
 std::map<eInstructionType, void (AVM::*)(const Instruction &)> AVM::_funcMap =
 {
@@ -180,14 +181,21 @@ void	AVM::ExecMod(const Instruction & instruction)
 
 void	AVM::ExecPrint(const Instruction & instruction)
 {
-	std::cout << "In ExecPrint." << std::endl;
 	(void)instruction;
+	std::cout << "In ExecPrint." << std::endl;
+
+	const	IOperand	*first = peek_operand("print");
+	if (first->getType() != OperandTypeInt8)
+		throw RuntimeException("Tried to print a non int8 operand.");
+	char c = static_cast<char>(stoi(first->toString()));
+	std::cout << c << std::endl;
 }
 
 void	AVM::ExecExit(const Instruction & instruction)
 {
-	std::cout << "In ExecExit." << std::endl;
 	(void)instruction;
+	std::cout << "In ExecExit." << std::endl;
+	exit(6);
 }
 
 const IOperand	*AVM::pop_operand(std::string operation)
@@ -196,7 +204,7 @@ const IOperand	*AVM::pop_operand(std::string operation)
 	{
 		const IOperand *ret = _stack.top();
 		_stack.pop();
-		return (ret);
+		return ret;
 	}
 	else
 		throw RuntimeException("Stack must have at least two instructions to execute the " + operation + " operation.");
@@ -207,7 +215,7 @@ const IOperand	*AVM::peek_operand(std::string operation)
 	if (_stack.size() > 0)
 	{
 		const IOperand *ret = _stack.top();
-		return (ret);
+		return ret;
 	}
 	else
 		throw RuntimeException("Stack must have at least one instructions to execute the " + operation + " operation.");

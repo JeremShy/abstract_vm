@@ -44,8 +44,15 @@ std::vector<Instruction>	Parser::getInstructions()
 			(this->*(it->second))();
 		_iterator++;
 	}
+	std::vector<Instruction>::iterator it2 = _instructions.begin();
 
-	return _instructions;
+	while (it2 != _instructions.end())
+	{
+		if (it2->getType() == Exit)
+			return _instructions;
+		it2++;
+	}
+	throw SyntaxicException("Expected an exit instruction in the program.");
 }
 
 Parser::Parser(void)
@@ -96,5 +103,5 @@ const IOperand	*Parser::createCurrentOperand()
 	operandType = instructionToOperand(instructionType);
 	operand = operandFactory.createOperand(operandType, _iterator->getContent());
 
-	return (operand);
+	return operand;
 }

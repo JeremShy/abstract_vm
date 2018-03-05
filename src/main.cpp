@@ -10,6 +10,7 @@
 #include <Parser.hpp>
 #include <Int8.hpp>
 #include <AVM.hpp>
+#include <sstream>
 
 std::string	get_instructions_from_stdin()
 {
@@ -47,9 +48,15 @@ std::string	get_instructions_from_stdin()
 
 std::string	get_instructions_from_file(char *filename)
 {
-	std::cout << "Reading from a file isn't yet supported. (file = " << filename << ")." << std::endl;
-	exit(2);
-	return std::string(std::string("Not yet supported") + filename + "\n");
+	std::ifstream file(filename);
+
+	if (!file.is_open() || file.bad() || file.fail() || !file.good())
+		throw RuntimeException("Could not open file " + std::string(filename));
+	std::stringstream buffer;
+	buffer << file.rdbuf();
+	if (buffer.str() == "")
+		throw RuntimeException("Invalid or empty file " + std::string(filename));
+	return buffer.str();
 }
 
 int main(int ac, char **av)
@@ -64,10 +71,17 @@ int main(int ac, char **av)
 	std::vector<Instruction> instructions;
 	Parser parser;
 
-	if (ac == 1)
-		file = get_instructions_from_stdin();
-	else
-		file = get_instructions_from_file(av[1]);
+	try {
+		if (ac == 1)
+			file = get_instructions_from_stdin();
+		else
+			file = get_instructions_from_file(av[1]);
+	} catch (const RuntimeException & e)
+	{
+		std::cout << "An error occured while trying to read input:" << std::endl;
+		std::cout << '\t' << e.what() << std::endl;
+		return 1;
+	}
 
 	try {
 		tokens = lexer(file);
@@ -75,6 +89,7 @@ int main(int ac, char **av)
 	} catch (const LexicalException & e) {
 		std::cout << "An error occured during lexical analysis:" << std::endl;
 		std::cout << '\t' << e.what() << std::endl;
+		return 2;
 	}
 
 	try {
@@ -83,10 +98,12 @@ int main(int ac, char **av)
 	} catch (const SyntaxicException & e) {
 		std::cout << "An error occured during syntactic analysis:" << std::endl;
 		std::cout << '\t' << e.what() << std::endl;
+		return 3;
 	}
 	catch (const RuntimeException & e) {
 		std::cout << "An error occured:" << std::endl;
 		std::cout << '\t' << e.what() << std::endl;
+		return 4;
 	}
 
 	try {
@@ -95,5 +112,7 @@ int main(int ac, char **av)
 	} catch (const RuntimeException & e) {
 		std::cout << "An error occured during runtime:" << std::endl;
 		std::cout << '\t' << e.what() << std::endl;
+		return 5;
 	}
+	return 0;
 }

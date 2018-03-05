@@ -39,7 +39,7 @@ bool OperandTemplate<T>::operator==( IOperand const & rhs ) const
 template<typename T>
 bool OperandTemplate<T>::operator!=( IOperand const & rhs ) const
 {
-	return  !(*this == rhs)
+	return  !(*this == rhs);
 }
 
 
@@ -60,7 +60,7 @@ IOperand const * OperandTemplate<T>::operator+( IOperand const & rhs ) const
 	std::cout << "Resultat of add : " << rez << std::endl;
 
 	OperandFactory op;
-	return (op.createOperand(returnType, std::to_string(rez)));
+	return op.createOperand(returnType, std::to_string(rez));
 }
 
 template <typename T>
@@ -74,7 +74,7 @@ IOperand const * OperandTemplate<T>::operator-( IOperand const & rhs ) const
 	std::cout << "Resultat of add : " << rez << std::endl;
 
 	OperandFactory op;
-	return (op.createOperand(returnType, std::to_string(rez)));
+	return op.createOperand(returnType, std::to_string(rez));
 }
 
 template <typename T>
@@ -88,7 +88,7 @@ IOperand const * OperandTemplate<T>::operator*( IOperand const & rhs ) const
 	std::cout << "Resultat of add : " << rez << std::endl;
 
 	OperandFactory op;
-	return (op.createOperand(returnType, std::to_string(rez)));
+	return op.createOperand(returnType, std::to_string(rez));
 }
 
 template <typename T>
@@ -107,7 +107,7 @@ IOperand const * OperandTemplate<T>::operator/( IOperand const & rhs ) const
 	std::cout << "Resultat of add : " << rez << std::endl;
 
 	OperandFactory op;
-	return (op.createOperand(returnType, std::to_string(rez)));
+	return op.createOperand(returnType, std::to_string(rez));
 }
 
 template <typename T>
@@ -126,7 +126,7 @@ IOperand const * OperandTemplate<T>::operator%( IOperand const & rhs ) const
 	std::cout << "Resultat of add : " << rez << std::endl;
 
 	OperandFactory op;
-	return (op.createOperand(returnType, std::to_string(rez)));
+	return op.createOperand(returnType, std::to_string(rez));
 }
 
 #endif
