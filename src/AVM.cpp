@@ -66,6 +66,7 @@ void	AVM::ExecPush(const Instruction & instruction)
 	std::cout << "In ExecPush." << std::endl;
 	_stack.push(instruction.getValue());
 }
+
 void	AVM::ExecPop(const Instruction & instruction)
 {
 	std::cout << "In ExecPop." << std::endl;
@@ -78,6 +79,7 @@ void	AVM::ExecPop(const Instruction & instruction)
 		throw RuntimeException("Pop on empty stack.\n");
 	(void)instruction;
 }
+
 void	AVM::ExecDump(const Instruction & instruction)
 {
 	std::cout << "In ExecDump." << std::endl;
@@ -115,6 +117,7 @@ void	AVM::ExecAdd(const Instruction & instruction)
 	delete second;
 	_stack.push(added);
 }
+
 void	AVM::ExecSub(const Instruction & instruction)
 {
 	(void)instruction;
@@ -128,6 +131,7 @@ void	AVM::ExecSub(const Instruction & instruction)
 	delete second;
 	_stack.push(added);
 }
+
 void	AVM::ExecMul(const Instruction & instruction)
 {
 	(void)instruction;
@@ -141,6 +145,7 @@ void	AVM::ExecMul(const Instruction & instruction)
 	delete second;
 	_stack.push(added);
 }
+
 void	AVM::ExecDiv(const Instruction & instruction)
 {
 	(void)instruction;
@@ -154,6 +159,7 @@ void	AVM::ExecDiv(const Instruction & instruction)
 	delete second;
 	_stack.push(added);
 }
+
 void	AVM::ExecMod(const Instruction & instruction)
 {
 	(void)instruction;
@@ -167,11 +173,13 @@ void	AVM::ExecMod(const Instruction & instruction)
 	delete second;
 	_stack.push(added);
 }
+
 void	AVM::ExecPrint(const Instruction & instruction)
 {
 	std::cout << "In ExecPrint." << std::endl;
 	(void)instruction;
 }
+
 void	AVM::ExecExit(const Instruction & instruction)
 {
 	std::cout << "In ExecExit." << std::endl;
