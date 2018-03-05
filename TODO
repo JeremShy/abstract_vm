@@ -1,4 +1,2 @@
 TODO:
-	exit: Terminate the execution of the current program. If this instruction does not appears while all others instruction has been processed, the execution must stop with an error.
-	Terminer la classe AVM.
 	Erreur lorsque ;; lorsqu'on lit depuis un fichier
