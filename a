@@ -1,9 +1,15 @@
-; -------------
-; sample.avm -
-; -------------
-push int32(42)
-push float(33.12345)
-dump
-assert float(33.1)
-dump
+push int8(33) ;!
+push int8(108) l
+push int8112) ;p
+print
+pop
+print
+pop
+print (
+\
+pop
+print
+pop
+print
+pop
 exit

@@ -4,7 +4,7 @@
 # include <exception>
 # include <string>
 
-class RuntimeException : public std::exception
+class RuntimeException : public std::runtime_error
 {
 private:
 	char _what[128];

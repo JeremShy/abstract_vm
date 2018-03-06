@@ -4,7 +4,7 @@
 # include <exception>
 # include <string>
 
-class SyntaxicException : public std::exception
+class SyntaxicException : public std::logic_error
 {
 private:
 	char _what[128];

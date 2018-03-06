@@ -4,7 +4,7 @@
 # include <exception>
 # include <string>
 
-class LexicalException : public std::exception
+class LexicalException : public std::logic_error
 {
 private:
 	char _what[128];

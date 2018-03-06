@@ -12,16 +12,16 @@ RuntimeException & RuntimeException::operator=(RuntimeException const & rhs)
 	return *this;
 }
 
-RuntimeException::RuntimeException() : _what("Not defined")
+RuntimeException::RuntimeException() : std::runtime_error("Not define"), _what("Not defined")
 {
 }
 
-RuntimeException::RuntimeException(const char *what)
+RuntimeException::RuntimeException(const char *what) : std::runtime_error(what)
 {
 	strncpy(_what, what, sizeof(_what) - 1);
 }
 
-RuntimeException::RuntimeException(std::string const & what)
+RuntimeException::RuntimeException(std::string const & what) : std::runtime_error(what)
 {
 	strncpy(_what, what.c_str(), sizeof(_what) - 1);
 }

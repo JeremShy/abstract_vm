@@ -11,16 +11,16 @@ LexicalException & LexicalException::operator=(LexicalException const & rhs)
 	return *this;
 }
 
-LexicalException::LexicalException() : _what("Not defined")
+LexicalException::LexicalException() : std::logic_error("Not defined"), _what("Not defined")
 {
 }
 
-LexicalException::LexicalException(const char *what)
+LexicalException::LexicalException(const char *what) : std::logic_error(what)
 {
 	strncpy(_what, what, sizeof(_what) - 1);
 }
 
-LexicalException::LexicalException(std::string const & what)
+LexicalException::LexicalException(std::string const & what) : std::logic_error(what)
 {
 	strncpy(_what, what.c_str(), sizeof(_what) - 1);
 }
