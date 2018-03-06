@@ -23,7 +23,7 @@ std::string	to_string(float nbr)
 {
 	std::ostringstream	out;
 
-	out << std::setprecision(std::numeric_limits<float>::max_digits10 - 1) << nbr;
+	out << nbr;
 	return (out.str());
 }
 
@@ -31,6 +31,6 @@ std::string	to_string(double nbr)
 {
 	std::ostringstream	out;
 
-	out << std::setprecision(std::numeric_limits<double>::max_digits10 - 1) << nbr;
+	out << nbr;
 	return (out.str());
 }
