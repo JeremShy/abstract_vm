@@ -33,7 +33,6 @@ std::string	get_instructions_from_stdin()
 		}
 		if (line == ";;")
 		{
-			//TODO : remove the exception flags on std::cin ?
 			return ret + '\n';
 		}
 		if (!first)

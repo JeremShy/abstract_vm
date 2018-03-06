@@ -50,7 +50,6 @@ std::vector<Token> lexer(std::string arg, bool & errorOccured)
 	std::vector<Token> ret;
 	size_t	lineNumber;
 
-	// std::cout << "Analyzing string : [" << str << "]" << std::endl;
 	lineNumber = 1;
 	bool	printed_err_message;
 	for (size_t i = 0; i < str.length(); i++)

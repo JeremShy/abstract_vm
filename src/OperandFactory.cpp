@@ -21,7 +21,6 @@ IOperand const * OperandFactory::createOperand(eOperandType type, std::string co
 
 IOperand const * OperandFactory::createInt8(std::string const & value) const
 {
-	// std::cout << "Called operand factory createInt8 method with value : " << value << std::endl;
 	double dvalue = 0;
 	try {
 		dvalue = std::stod(value);
@@ -39,7 +38,6 @@ IOperand const * OperandFactory::createInt8(std::string const & value) const
 
 IOperand const * OperandFactory::createInt16(std::string const & value) const
 {
-	// std::cout << "Called operand factory createInt16 method with value : " << value << std::endl;
 	double dvalue = 0;
 	try {
 		dvalue = std::stod(value);
@@ -57,7 +55,6 @@ IOperand const * OperandFactory::createInt16(std::string const & value) const
 
 IOperand const * OperandFactory::createInt32(std::string const & value) const
 {
-	// std::cout << "Called operand factory createInt32 method with value : " << value << std::endl;
 	double dvalue = 0;
 	try {
 		dvalue = std::stod(value);
@@ -75,7 +72,6 @@ IOperand const * OperandFactory::createInt32(std::string const & value) const
 
 IOperand const * OperandFactory::createFloat(std::string const & value) const
 {
-	// std::cout << "Called operand factory createFloat method with value : " << value << std::endl;
 	double dvalue = 0;
 	try {
 		dvalue = std::stod(value);
@@ -93,7 +89,6 @@ IOperand const * OperandFactory::createFloat(std::string const & value) const
 
 IOperand const * OperandFactory::createDouble(std::string const & value) const
 {
-	// std::cout << "Called operand factory createDouble method with value : " << value << std::endl;
 	double dvalue = 0;
 	try {
 		dvalue = std::stod(value);

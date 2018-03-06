@@ -9,7 +9,6 @@ void Parser::stateStart(void)
 		type = _iterator->getInstructionType();
 		if (type == Push || type == Assert)
 		{
-			// std::cout << "Push or Assert instruction. Expecting an argument..." << std::endl;
 			_currentInstructionSpecifier = _iterator;
 			_state = ExpectingValue;
 		}
@@ -25,7 +24,6 @@ void Parser::stateStart(void)
 	}
 	else if (_iterator->getType() == TOK_SEP)
 	{
-		// std::cout << "Separator found." << std::endl;
 	}
 	else
 	{
@@ -42,7 +40,6 @@ void	Parser::stateExpectingValue(void)
 		type = _iterator->getInstructionType();
 		if (type == TypeInt8 || type == TypeInt16 || type == TypeInt32 || type == TypeFloat || type == TypeDouble)
 		{
-			// std::cout << "Got a type specifier, expecting an opening bracket." << std::endl;
 			_currentTypeSpecifier = _iterator;
 			_state = ExpectingOpeningBracket;
 		}

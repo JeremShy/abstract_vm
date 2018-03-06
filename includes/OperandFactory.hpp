@@ -13,8 +13,6 @@
 
 # include <cfloat>
 
-// typedef IOperand const * (OperandFactory::*t_operand_factory_func)(std::string const &)const;
-
 class OperandFactory {
 public:
 	OperandFactory(void);

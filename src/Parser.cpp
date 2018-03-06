@@ -97,13 +97,11 @@ std::vector<Instruction>	Parser::getInstructions(bool & errorOccured)
 
 Parser::Parser(void)
 {
-	// std::cout << "Creating a parser." << std::endl;
 	_state = Start;
 }
 
 void Parser::setToken(std::vector<Token> const & tokens)
 {
-	// std::cout << "Setting a token for the parser." << std::endl;
 	_tokens = tokens;
 }
 

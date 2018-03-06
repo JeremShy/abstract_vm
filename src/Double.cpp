@@ -10,7 +10,6 @@ Double::Double(double value)
 {
 	this->_value = value;
 	this->_stringRepresentation = to_string(value);
-	// std::cout << "Creating a Double object with value : " << _stringRepresentation << std::endl;
 }
 
 Double::Double(Double const & src)

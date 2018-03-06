@@ -21,8 +21,6 @@ enum eParserState {
 
 class Parser {
 
-	// typedef void (Parser::t_ParserStateFunction)(void);
-
 public:
 	Parser(std::vector<Token> const & tokens);
 	std::vector<Instruction> getInstructions(bool & errorOccured);
