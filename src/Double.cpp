@@ -1,5 +1,6 @@
 #include <Double.hpp>
 #include <iostream>
+#include <to_string.hpp>
 
 Double::Double(void)
 {
@@ -8,7 +9,7 @@ Double::Double(void)
 Double::Double(double value)
 {
 	this->_value = value;
-	this->_stringRepresentation = std::to_string(value);
+	this->_stringRepresentation = to_string(value);
 	// std::cout << "Creating a Double object with value : " << _stringRepresentation << std::endl;
 }
 

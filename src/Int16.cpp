@@ -1,5 +1,6 @@
 #include <Int16.hpp>
 #include <iostream>
+#include <to_string.hpp>
 
 Int16::Int16(void)
 {
@@ -8,7 +9,7 @@ Int16::Int16(void)
 Int16::Int16(int16_t value)
 {
 	this->_value = value;
-	this->_stringRepresentation = std::to_string(value);
+	this->_stringRepresentation = to_string(value);
 	// std::cout << "Creating an Int16 object with value : " << std::to_string(_value) << std::endl;
 }
 

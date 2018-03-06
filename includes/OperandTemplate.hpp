@@ -1,6 +1,7 @@
 #ifndef OPERANDTEMPLATE_HPP
 # define OPERANDTEMPLATE_HPP
 
+# include <to_string.hpp>
 # include <IOperand.hpp>
 # include <OperandFactory.hpp>
 # include <cmath>
@@ -60,7 +61,7 @@ IOperand const * OperandTemplate<T>::operator+( IOperand const & rhs ) const
 	// std::cout << "Resultat of add : " << rez << std::endl;
 
 	OperandFactory op;
-	return op.createOperand(returnType, std::to_string(rez));
+	return op.createOperand(returnType, to_string(rez));
 }
 
 template <typename T>
@@ -74,7 +75,7 @@ IOperand const * OperandTemplate<T>::operator-( IOperand const & rhs ) const
 	// std::cout << "Resultat of add : " << rez << std::endl;
 
 	OperandFactory op;
-	return op.createOperand(returnType, std::to_string(rez));
+	return op.createOperand(returnType, to_string(rez));
 }
 
 template <typename T>
@@ -88,7 +89,7 @@ IOperand const * OperandTemplate<T>::operator*( IOperand const & rhs ) const
 	// std::cout << "Resultat of add : " << rez << std::endl;
 
 	OperandFactory op;
-	return op.createOperand(returnType, std::to_string(rez));
+	return op.createOperand(returnType, to_string(rez));
 }
 
 template <typename T>
@@ -107,7 +108,7 @@ IOperand const * OperandTemplate<T>::operator/( IOperand const & rhs ) const
 	// std::cout << "Resultat of add : " << rez << std::endl;
 
 	OperandFactory op;
-	return op.createOperand(returnType, std::to_string(rez));
+	return op.createOperand(returnType, to_string(rez));
 }
 
 template <typename T>
@@ -126,7 +127,7 @@ IOperand const * OperandTemplate<T>::operator%( IOperand const & rhs ) const
 	// std::cout << "Resultat of add : " << rez << std::endl;
 
 	OperandFactory op;
-	return op.createOperand(returnType, std::to_string(rez));
+	return op.createOperand(returnType, to_string(rez));
 }
 
 #endif

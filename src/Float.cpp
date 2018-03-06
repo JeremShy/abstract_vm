@@ -1,5 +1,6 @@
 #include <Float.hpp>
 #include <iostream>
+#include <to_string.hpp>
 
 Float::Float(void)
 {
@@ -8,7 +9,7 @@ Float::Float(void)
 Float::Float(float value)
 {
 	this->_value = value;
-	this->_stringRepresentation = std::to_string(value);
+	this->_stringRepresentation = to_string(value);
 	// std::cout << "Creating a Float object with value : " << std::to_string(_value) << std::endl;
 }
 

@@ -1,5 +1,6 @@
 #include <Int8.hpp>
 #include <iostream>
+#include <to_string.hpp>
 
 Int8::Int8(void)
 {
@@ -8,7 +9,7 @@ Int8::Int8(void)
 Int8::Int8(int8_t value)
 {
 	this->_value = value;
-	this->_stringRepresentation = std::to_string(value);
+	this->_stringRepresentation = to_string(value);
 	// std::cout << "Creating an Int8 object with value : " << std::to_string(_value) << std::endl;
 }
 

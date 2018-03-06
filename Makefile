@@ -14,7 +14,8 @@ SRC_NAME =	Int8.cpp \
 			Instruction.cpp \
 			ParserStates.cpp \
 			OperandFactory.cpp \
-			AVM.cpp
+			AVM.cpp \
+			to_string.cpp
 
 INC_PATH = ./includes/
 OBJ_PATH = ./obj/
