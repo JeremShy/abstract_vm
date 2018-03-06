@@ -1,2 +1,3 @@
 TODO:
 	Afficher les flottants que jusqu'a la derniere decimale utile (genre pas 1.1000)
+	change to_string to print more than 6 digits
