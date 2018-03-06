@@ -63,44 +63,43 @@ void	AVM::execute(void)
 
 void	AVM::ExecPush(const Instruction & instruction)
 {
-	std::cout << "In ExecPush." << std::endl;
+	// std::cout << "In ExecPush." << std::endl;
 	_stack.push(instruction.getValue());
 }
 
 void	AVM::ExecPop(const Instruction & instruction)
 {
-	std::cout << "In ExecPop." << std::endl;
+	// std::cout << "In ExecPop." << std::endl;
 	if (_stack.size() > 0)
 	{
 		delete _stack.top();
 		_stack.pop();
 	}
 	else
-		throw RuntimeException("Pop on empty stack.\n");
+		throw RuntimeException("Pop on empty stack.");
 	(void)instruction;
 }
 
 void	AVM::ExecDump(const Instruction & instruction)
 {
-	std::cout << "In ExecDump." << std::endl;
+	// std::cout << "In ExecDump." << std::endl;
+	// std::cout << "/// Starting dump" << std::endl;
 	std::stack<const IOperand*> copy(_stack);
 
-	int	nbr = 1;
 	while (_stack.size() > 0)
 	{
 		const IOperand *operand = _stack.top();
-		std::cout << nbr << " : " << operand->toString() << std::endl;
-		nbr++;
+		std::cout << operand->toString() << std::endl;
 		_stack.pop();
 	}
 	_stack = copy;
-
+	// std::cout << "/// End of dump" << std::endl;
 	(void)instruction;
 }
 
 void	AVM::ExecAssert(const Instruction & instruction)
 {
-	std::cout << "In ExecAssert." << std::endl;
+	// std::cout << "In ExecAssert." << std::endl;
 
 	const IOperand	*ok_value = instruction.getValue();
 	const IOperand	*our_value = peek_operand("assert");
@@ -113,7 +112,7 @@ void	AVM::ExecAdd(const Instruction & instruction)
 {
 	(void)instruction;
 
-	std::cout << "In ExecAdd." << std::endl;
+	// std::cout << "In ExecAdd." << std::endl;
 	const IOperand	*first = pop_operand("add");
 	const IOperand	*second = pop_operand("add");
 
@@ -127,7 +126,7 @@ void	AVM::ExecSub(const Instruction & instruction)
 {
 	(void)instruction;
 
-	std::cout << "In ExecSub." << std::endl;
+	// std::cout << "In ExecSub." << std::endl;
 	const IOperand	*first = pop_operand("sub");
 	const IOperand	*second = pop_operand("sub");
 
@@ -141,7 +140,7 @@ void	AVM::ExecMul(const Instruction & instruction)
 {
 	(void)instruction;
 
-	std::cout << "In ExecMul." << std::endl;
+	// std::cout << "In ExecMul." << std::endl;
 	const IOperand	*first = pop_operand("mul");
 	const IOperand	*second = pop_operand("mul");
 
@@ -155,7 +154,7 @@ void	AVM::ExecDiv(const Instruction & instruction)
 {
 	(void)instruction;
 
-	std::cout << "In ExecDiv." << std::endl;
+	// std::cout << "In ExecDiv." << std::endl;
 	const IOperand	*first = pop_operand("div");
 	const IOperand	*second = pop_operand("div");
 
@@ -169,7 +168,7 @@ void	AVM::ExecMod(const Instruction & instruction)
 {
 	(void)instruction;
 
-	std::cout << "In ExecMod." << std::endl;
+	// std::cout << "In ExecMod." << std::endl;
 	const IOperand	*first = pop_operand("mod");
 	const IOperand	*second = pop_operand("mod");
 
@@ -182,7 +181,7 @@ void	AVM::ExecMod(const Instruction & instruction)
 void	AVM::ExecPrint(const Instruction & instruction)
 {
 	(void)instruction;
-	std::cout << "In ExecPrint." << std::endl;
+	// std::cout << "In ExecPrint." << std::endl;
 
 	const	IOperand	*first = peek_operand("print");
 	if (first->getType() != OperandTypeInt8)
@@ -194,7 +193,7 @@ void	AVM::ExecPrint(const Instruction & instruction)
 void	AVM::ExecExit(const Instruction & instruction)
 {
 	(void)instruction;
-	std::cout << "In ExecExit." << std::endl;
+	// std::cout << "In ExecExit." << std::endl;
 	exit(6);
 }
 

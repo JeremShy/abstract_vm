@@ -76,41 +76,30 @@ int main(int ac, char **av)
 			file = get_instructions_from_stdin();
 		else
 			file = get_instructions_from_file(av[1]);
-	} catch (const RuntimeException & e)
-	{
-		std::cout << "An error occured while trying to read input:" << std::endl;
+	} catch (const RuntimeException & e) {
+		std::cout << "Input error :" << std::endl;
 		std::cout << '\t' << e.what() << std::endl;
 		return 1;
 	}
 
-	try {
-		tokens = lexer(file);
-		std::cout << std::endl;
-	} catch (const LexicalException & e) {
-		std::cout << "An error occured during lexical analysis:" << std::endl;
-		std::cout << '\t' << e.what() << std::endl;
-		return 2;
-	}
+	bool	errorOccured = false;
+	tokens = lexer(file, errorOccured);
 
 	try {
 		parser.setToken(tokens);
-		instructions = parser.getInstructions();
+		instructions = parser.getInstructions(errorOccured);
 	} catch (const SyntaxicException & e) {
-		std::cout << "An error occured during syntactic analysis:" << std::endl;
-		std::cout << '\t' << e.what() << std::endl;
 		return 3;
 	}
-	catch (const RuntimeException & e) {
-		std::cout << "An error occured:" << std::endl;
-		std::cout << '\t' << e.what() << std::endl;
-		return 4;
-	}
+
+	if (errorOccured)
+		return 6;
 
 	try {
 		AVM vm(instructions);
 		vm.execute();
 	} catch (const RuntimeException & e) {
-		std::cout << "An error occured during runtime:" << std::endl;
+		std::cout << "Runtime error :" << std::endl;
 		std::cout << '\t' << e.what() << std::endl;
 		return 5;
 	}

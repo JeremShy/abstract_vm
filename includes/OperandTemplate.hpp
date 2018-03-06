@@ -57,7 +57,7 @@ IOperand const * OperandTemplate<T>::operator+( IOperand const & rhs ) const
 
 	rez = _value + std::stod(rhs.toString());
 
-	std::cout << "Resultat of add : " << rez << std::endl;
+	// std::cout << "Resultat of add : " << rez << std::endl;
 
 	OperandFactory op;
 	return op.createOperand(returnType, std::to_string(rez));
@@ -71,7 +71,7 @@ IOperand const * OperandTemplate<T>::operator-( IOperand const & rhs ) const
 
 	rez = _value - std::stod(rhs.toString());
 
-	std::cout << "Resultat of add : " << rez << std::endl;
+	// std::cout << "Resultat of add : " << rez << std::endl;
 
 	OperandFactory op;
 	return op.createOperand(returnType, std::to_string(rez));
@@ -85,7 +85,7 @@ IOperand const * OperandTemplate<T>::operator*( IOperand const & rhs ) const
 
 	rez = _value * std::stod(rhs.toString());
 
-	std::cout << "Resultat of add : " << rez << std::endl;
+	// std::cout << "Resultat of add : " << rez << std::endl;
 
 	OperandFactory op;
 	return op.createOperand(returnType, std::to_string(rez));
@@ -104,7 +104,7 @@ IOperand const * OperandTemplate<T>::operator/( IOperand const & rhs ) const
 
 	rez = _value / std::stod(rhs.toString());
 
-	std::cout << "Resultat of add : " << rez << std::endl;
+	// std::cout << "Resultat of add : " << rez << std::endl;
 
 	OperandFactory op;
 	return op.createOperand(returnType, std::to_string(rez));
@@ -123,7 +123,7 @@ IOperand const * OperandTemplate<T>::operator%( IOperand const & rhs ) const
 
 	rez = fmod(_value, std::stod(rhs.toString()));
 
-	std::cout << "Resultat of add : " << rez << std::endl;
+	// std::cout << "Resultat of add : " << rez << std::endl;
 
 	OperandFactory op;
 	return op.createOperand(returnType, std::to_string(rez));

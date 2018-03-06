@@ -1,4 +1,6 @@
 #include <Parser.hpp>
+#include <LexicalException.hpp>
+#include <RuntimeException.hpp>
 
 std::map<eParserState, void (Parser::*)(void)> Parser::_stateMap =
 {
@@ -25,13 +27,14 @@ Parser::Parser(std::vector<Token> const & tokens) : _tokens(tokens), _state(Star
 {
 }
 
-std::vector<Instruction>	Parser::getInstructions()
+std::vector<Instruction>	Parser::getInstructions(bool & errorOccured)
 {
 	/*
 		Create an instruction list from the tokens.
 	*/
-	// std::cout << "Starting to compute the instructions from the tokens." << std::endl;
 	_iterator = _tokens.begin();
+	bool	printed_err_message = false;
+
 
 	while (_iterator != _tokens.end())
 	{
@@ -41,18 +44,55 @@ std::vector<Instruction>	Parser::getInstructions()
 		if (it == _stateMap.end())
 			throw SyntaxicException("Didn't expect this state !");
 		else
-			(this->*(it->second))();
+		{
+			try {
+				(this->*(it->second))();
+			} catch (const SyntaxicException & e) {
+				if (printed_err_message == false)
+				{
+					std::cout << "Parser error(s) : " << std::endl;
+					printed_err_message = true;
+				}
+				errorOccured = true;
+				std::cout << '\t' << e.what() << std::endl;
+				while (_iterator != _tokens.end() && _iterator + 1 != _tokens.end() && _iterator->getType() != TOK_SEP)
+					_iterator++;
+				_state = Start;
+			} catch (const RuntimeException & e) {
+				if (printed_err_message == false)
+				{
+					std::cout << "Parser error(s) : " << std::endl;
+					printed_err_message = true;
+				}
+				errorOccured = true;
+				std::cout << '\t' << e.what() << std::endl;
+				while (_iterator != _tokens.end() && _iterator + 1 != _tokens.end() && _iterator->getType() != TOK_SEP)
+					_iterator++;
+				_state = Start;
+			}
+		}
 		_iterator++;
 	}
-	std::vector<Instruction>::iterator it2 = _instructions.begin();
 
-	while (it2 != _instructions.end())
-	{
-		if (it2->getType() == Exit)
-			return _instructions;
-		it2++;
+	try {
+		std::vector<Instruction>::iterator it2 = _instructions.begin();
+		while (it2 != _instructions.end())
+		{
+			if (it2->getType() == Exit)
+				return _instructions;
+			it2++;
+		}
+		throw SyntaxicException("Expected an exit instruction in the program.");
+	} catch (const SyntaxicException & e) {
+		if (printed_err_message == false)
+		{
+			std::cout << "Parser error : " << std::endl;
+			printed_err_message = true;
+		}
+		std::cout << '\t' << e.what() << std::endl;
+		errorOccured = true;
+		throw SyntaxicException("Why would you print this ?");
 	}
-	throw SyntaxicException("Expected an exit instruction in the program.");
 }
 
 Parser::Parser(void)

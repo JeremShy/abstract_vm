@@ -9,7 +9,7 @@ Int8::Int8(int8_t value)
 {
 	this->_value = value;
 	this->_stringRepresentation = std::to_string(value);
-	std::cout << "Creating an Int8 object with value : " << std::to_string(_value) << std::endl;
+	// std::cout << "Creating an Int8 object with value : " << std::to_string(_value) << std::endl;
 }
 
 Int8::Int8(Int8 const & src)

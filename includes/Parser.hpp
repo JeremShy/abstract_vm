@@ -25,7 +25,7 @@ class Parser {
 
 public:
 	Parser(std::vector<Token> const & tokens);
-	std::vector<Instruction> getInstructions();
+	std::vector<Instruction> getInstructions(bool & errorOccured);
 
 	Parser(void);
 	Parser(Parser const & src);

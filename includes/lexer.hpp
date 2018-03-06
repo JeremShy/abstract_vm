@@ -12,8 +12,6 @@ Token getOperator(std::string str, size_t &i, size_t &lineNumber);
 Token getSeparator(std::string str, size_t &i, size_t &lineNumber);
 
 bool isseparator(char c);
-
-
-std::vector<Token> lexer(std::string arg);
+std::vector<Token> lexer(std::string arg, bool & errorOccured);
 
 #endif

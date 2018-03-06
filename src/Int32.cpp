@@ -9,7 +9,7 @@ Int32::Int32(int32_t value)
 {
 	this->_value = value;
 	this->_stringRepresentation = std::to_string(value);
-	std::cout << "Creating an Int32 object with value : " << std::to_string(_value) << std::endl;
+	// std::cout << "Creating an Int32 object with value : " << std::to_string(_value) << std::endl;
 }
 
 Int32::Int32(Int32 const & src)

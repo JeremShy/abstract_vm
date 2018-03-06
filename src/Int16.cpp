@@ -9,7 +9,7 @@ Int16::Int16(int16_t value)
 {
 	this->_value = value;
 	this->_stringRepresentation = std::to_string(value);
-	std::cout << "Creating an Int16 object with value : " << std::to_string(_value) << std::endl;
+	// std::cout << "Creating an Int16 object with value : " << std::to_string(_value) << std::endl;
 }
 
 Int16::Int16(Int16 const & src)
