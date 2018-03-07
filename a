@@ -1,6 +1,0 @@
-push float(12.12)
-push double(12.1200001)
-mul
-dump
-assert double(146.8944)
-exit
